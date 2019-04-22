@@ -19,7 +19,7 @@
   },
   "husky": {
     "hooks": {
-      "prepare-commit-msg": "exec < /dev/tty && npm run changelog && git cz --hook"
+      "prepare-commit-msg": "exec < /dev/tty && npm run changelog && git add CHANGELOG.md && git cz --hook"
     }
   },
   "devDependencies": {
