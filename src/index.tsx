@@ -21,15 +21,16 @@ export function Modal({ showDialog, onCloseDialog }: ModalProps) {
           borderRadius: "10px"
         }}
       >
-        <p>I have a nice border now.</p>
-        <p>
-          Note that we could have used the simpler <code>Dialog</code> instead.
-        </p>
-
         <button className="close-button" onClick={onCloseDialog}>
           <VisuallyHidden>Close</VisuallyHidden>
           <span aria-hidden>×</span>
         </button>
+        <div>
+          <p>I have a nice border now.</p>
+          <p>
+            Note that we could have used the simpler <code>Dialog</code> instead.
+          </p>
+        </div>
       </DialogContent>
     </DialogOverlay>
   )

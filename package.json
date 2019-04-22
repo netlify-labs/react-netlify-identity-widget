@@ -1,12 +1,13 @@
 {
   "name": "react-netlify-identity-widget",
-  "version": "0.0.0-development",
+  "version": "0.0.2",
   "main": "dist/index.js",
   "umd:main": "dist/reactNetlifyIdentityWidget.umd.production.js",
   "module": "dist/reactNetlifyIdentityWidget.es.production.js",
   "typings": "dist/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "styles.css"
   ],
   "license": "MIT",
   "scripts": {
@@ -42,7 +43,7 @@
   "dependencies": {
     "@reach/dialog": "^0.2.3",
     "@reach/visually-hidden": "^0.1.3",
-    "react-netlify-identity": "^0.0.7"
+    "react-netlify-identity": "^0.0.9"
   },
   "config": {
     "commitizen": {
