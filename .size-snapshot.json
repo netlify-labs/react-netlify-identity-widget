@@ -1,0 +1,36 @@
+{
+  "/Users/swyx/Netlify/react-netlify-identity-widget/dist/reactNetlifyIdentityWidget.cjs.development.js": {
+    "bundled": 1146,
+    "minified": 831,
+    "gzipped": 428
+  },
+  "/Users/swyx/Netlify/react-netlify-identity-widget/dist/reactNetlifyIdentityWidget.cjs.production.js": {
+    "bundled": 1146,
+    "minified": 831,
+    "gzipped": 428
+  },
+  "/Users/swyx/Netlify/react-netlify-identity-widget/dist/reactNetlifyIdentityWidget.umd.development.js": {
+    "bundled": 1604,
+    "minified": 988,
+    "gzipped": 520
+  },
+  "/Users/swyx/Netlify/react-netlify-identity-widget/dist/reactNetlifyIdentityWidget.umd.production.js": {
+    "bundled": 1604,
+    "minified": 988,
+    "gzipped": 520
+  },
+  "/Users/swyx/Netlify/react-netlify-identity-widget/dist/reactNetlifyIdentityWidget.es.production.js": {
+    "bundled": 979,
+    "minified": 703,
+    "gzipped": 364,
+    "treeshaked": {
+      "rollup": {
+        "code": 67,
+        "import_statements": 67
+      },
+      "webpack": {
+        "code": 1117
+      }
+    }
+  }
+}
