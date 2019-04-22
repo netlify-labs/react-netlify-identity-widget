@@ -13,7 +13,7 @@
     "build": "tsdx build",
     "test": "tsdx test",
     "commit": "git-cz",
-    "version": "auto-changelog -p --template keepachangelog && git add CHANGELOG.md",
+    "version": "exec < /dev/tty && auto-changelog -p --template keepachangelog && git add CHANGELOG.md",
     "prepublishOnly": "git push && git push --tags && gh-release"
   },
   "husky": {
