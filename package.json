@@ -14,7 +14,7 @@
     "start": "tsdx watch",
     "build": "tsdx build",
     "test": "tsdx test",
-    "version": "auto-changelog -p --template keepachangelog && git add README.md CHANGELOG.md",
+    "version": "tsdx build && auto-changelog -p --template keepachangelog && git add .",
     "prepublishOnly": "git push && git push --tags && gh-release"
   },
   "devDependencies": {
