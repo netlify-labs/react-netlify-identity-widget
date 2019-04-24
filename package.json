@@ -4,7 +4,7 @@
   "main": "dist/index.js",
   "umd:main": "dist/reactNetlifyIdentityWidget.umd.production.js",
   "module": "dist/reactNetlifyIdentityWidget.es.production.js",
-  "typings": "dist/index.d.ts",
+  "typings": "dist/src/index.d.ts",
   "files": [
     "dist",
     "styles.css"
