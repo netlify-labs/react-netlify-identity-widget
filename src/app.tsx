@@ -1,6 +1,7 @@
 import React from "react"
 import { useNetlifyIdentity } from "react-netlify-identity"
-
+import { Login } from "./login"
+import { Logout } from "./logout"
 // import Modal from "./modal"
 // import SiteURLForm from "./forms/siteurl"
 // import LogoutForm from "./forms/logout"
@@ -58,10 +59,10 @@ import { IdentityContext } from "./context"
 // }
 
 function LoggedOutScreen() {
-  return <div>logged out</div>
+  return <Login />
 }
 function LoggedInScreen() {
-  return <div>logged in</div>
+  return <Logout />
 }
 
 function Gate() {
