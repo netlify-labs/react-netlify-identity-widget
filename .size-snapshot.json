@@ -1,28 +1,28 @@
 {
   "/Users/swyx/Netlify/react-netlify-identity-widget/dist/reactNetlifyIdentityWidget.cjs.development.js": {
-    "bundled": 8689,
-    "minified": 3490,
-    "gzipped": 1344
+    "bundled": 8887,
+    "minified": 3642,
+    "gzipped": 1373
   },
   "/Users/swyx/Netlify/react-netlify-identity-widget/dist/reactNetlifyIdentityWidget.cjs.production.js": {
-    "bundled": 8689,
-    "minified": 3490,
-    "gzipped": 1344
+    "bundled": 8887,
+    "minified": 3642,
+    "gzipped": 1373
   },
   "/Users/swyx/Netlify/react-netlify-identity-widget/dist/reactNetlifyIdentityWidget.umd.development.js": {
-    "bundled": 9595,
-    "minified": 3337,
-    "gzipped": 1362
+    "bundled": 9799,
+    "minified": 3375,
+    "gzipped": 1376
   },
   "/Users/swyx/Netlify/react-netlify-identity-widget/dist/reactNetlifyIdentityWidget.umd.production.js": {
-    "bundled": 9595,
-    "minified": 3337,
-    "gzipped": 1362
+    "bundled": 9799,
+    "minified": 3375,
+    "gzipped": 1376
   },
   "/Users/swyx/Netlify/react-netlify-identity-widget/dist/reactNetlifyIdentityWidget.es.production.js": {
-    "bundled": 8500,
-    "minified": 3341,
-    "gzipped": 1290,
+    "bundled": 8683,
+    "minified": 3480,
+    "gzipped": 1319,
     "treeshaked": {
       "rollup": {
         "code": 129,

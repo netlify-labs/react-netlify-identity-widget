@@ -6,7 +6,7 @@ import {
 } from "@reach/dialog"
 import VisuallyHidden from "@reach/visually-hidden"
 
-import { Widget } from "./app"
+import { Widget, NetlifyIdentityContext } from "./app"
 type ModalProps = {
   /** URL of your Netlify Instance with Identity enabled e.g. https://netlify-gotrue-in-react.netlify.com */
   netlifyInstance: string
@@ -15,7 +15,8 @@ type ModalProps = {
   /** modal will call this function to set the state of showDialog to false */
   onCloseDialog: () => void
 }
-export function Modal({ showDialog, onCloseDialog, netlifyInstance }: ModalProps) {
+export const IdentityContext = NetlifyIdentityContext
+export function IdentityModal({ showDialog, onCloseDialog, netlifyInstance }: ModalProps) {
   if (!netlifyInstance) {
     // just a safety check in case a JS user tries to skip this
     if (!validateUrl(netlifyInstance))
