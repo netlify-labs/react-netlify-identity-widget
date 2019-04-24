@@ -8,63 +8,78 @@ import { useNetlifyIdentity } from "react-netlify-identity"
 // import Providers from "./forms/providers"
 // import Message from "./forms/message"
 import { IdentityContext } from "./context"
+// const pagesWithHeader = { login: true, signup: true }
+// const pages = {
+//   login: {
+//     login: true,
+//     button: "Log in",
+//     button_saving: "Logging in",
+//     email: true,
+//     password: true,
+//     link: "amnesia",
+//     link_text: "Forgot password?",
+//     providers: true
+//   },
+//   signup: {
+//     signup: true,
+//     button: "Sign up",
+//     button_saving: "Signing Up",
+//     name: true,
+//     email: true,
+//     password: true,
+//     providers: true
+//   },
+//   amnesia: {
+//     title: "Recover password",
+//     button: "Send recovery email",
+//     button_saving: "Sending recovery email",
+//     email: true,
+//     link: "login",
+//     link_text: "Never mind"
+//   },
+//   recovery: {
+//     title: "Recover password",
+//     button: "Update password",
+//     button_saving: "Updating password",
+//     password: true,
+//     link: "login",
+//     link_text: "Never mind"
+//   },
+//   invite: {
+//     title: "Complete your signup",
+//     button: "Sign up",
+//     button_saving: "Signing Up",
+//     password: true,
+//     providers: true
+//   },
+//   user: {
+//     title: "Logged in"
+//   }
+// }
 
-const pagesWithHeader = { login: true, signup: true }
-const pages = {
-  login: {
-    login: true,
-    button: "Log in",
-    button_saving: "Logging in",
-    email: true,
-    password: true,
-    link: "amnesia",
-    link_text: "Forgot password?",
-    providers: true
-  },
-  signup: {
-    signup: true,
-    button: "Sign up",
-    button_saving: "Signing Up",
-    name: true,
-    email: true,
-    password: true,
-    providers: true
-  },
-  amnesia: {
-    title: "Recover password",
-    button: "Send recovery email",
-    button_saving: "Sending recovery email",
-    email: true,
-    link: "login",
-    link_text: "Never mind"
-  },
-  recovery: {
-    title: "Recover password",
-    button: "Update password",
-    button_saving: "Updating password",
-    password: true,
-    link: "login",
-    link_text: "Never mind"
-  },
-  invite: {
-    title: "Complete your signup",
-    button: "Sign up",
-    button_saving: "Signing Up",
-    password: true,
-    providers: true
-  },
-  user: {
-    title: "Logged in"
-  }
+function LoggedOutScreen() {
+  return <div>logged out</div>
+}
+function LoggedInScreen() {
+  return <div>logged in</div>
 }
 
-function App() {
+function Gate() {
+  const identity = React.useContext(IdentityContext)
+  const isLoggedIn = Boolean(identity && identity.user)
+  return isLoggedIn ? <LoggedInScreen /> : <LoggedOutScreen />
+}
+
+export function Widget() {
   const identity = useNetlifyIdentity("https://identity.netlify.com/") // supply the url of your Netlify site instance. VERY IMPORTANT
-
-  return <IdentityContext.Provider value={identity}>div</IdentityContext.Provider>
+  return (
+    <IdentityContext.Provider value={identity}>
+      <Gate />
+    </IdentityContext.Provider>
+  )
 }
 
-export default App
+export const NetlifyIdentityContext = IdentityContext // for use in your React app
 
 // renderBody() {
 //   const { store } = this.props

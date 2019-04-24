@@ -6,6 +6,7 @@ import {
 } from "@reach/dialog"
 import VisuallyHidden from "@reach/visually-hidden"
 
+import { Widget } from "./app"
 type ModalProps = {
   /** pass a boolean to be true or false */
   showDialog: boolean
@@ -26,10 +27,8 @@ export function Modal({ showDialog, onCloseDialog }: ModalProps) {
           <span aria-hidden>×</span>
         </button>
         <div>
-          <p>I have a nice border now.</p>
-          <p>
-            Note that we could have used the simpler <code>Dialog</code> instead.
-          </p>
+          widget
+          <Widget />
         </div>
       </DialogContent>
     </DialogOverlay>
