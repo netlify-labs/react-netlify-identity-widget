@@ -1,6 +1,6 @@
 {
   "name": "react-netlify-identity-widget",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "main": "dist/index.js",
   "umd:main": "dist/reactNetlifyIdentityWidget.umd.production.js",
   "module": "dist/reactNetlifyIdentityWidget.es.production.js",
@@ -14,14 +14,8 @@
     "start": "tsdx watch",
     "build": "tsdx build",
     "test": "tsdx test",
-    "changelog": "auto-changelog -p --template keepachangelog",
-    "prepublishOnly": "git push && git push --tags && gh-release",
-    "semantic-release": "semantic-release"
-  },
-  "husky": {
-    "hooks": {
-      "prepare-commit-msg": "exec < /dev/tty && git cz --hook"
-    }
+    "version": "auto-changelog -p --template keepachangelog && git add README.md CHANGELOG.md",
+    "prepublishOnly": "git push && git push --tags && gh-release"
   },
   "devDependencies": {
     "@types/jest": "^24.0.11",
