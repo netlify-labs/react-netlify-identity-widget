@@ -71,8 +71,8 @@ function Gate() {
   return isLoggedIn ? <LoggedInScreen /> : <LoggedOutScreen />
 }
 
-export function Widget() {
-  const identity = useNetlifyIdentity("https://identity.netlify.com/") // supply the url of your Netlify site instance. VERY IMPORTANT
+export function Widget({ netlifyInstance }: { netlifyInstance: string }) {
+  const identity = useNetlifyIdentity(netlifyInstance) // supply the url of your Netlify site instance. VERY IMPORTANT
   return (
     <IdentityContext.Provider value={identity}>
       <Gate />
