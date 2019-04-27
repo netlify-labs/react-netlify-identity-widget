@@ -1,0 +1,20 @@
+diff --git a/node_modules/tsdx/dist/createRollupConfig.js b/node_modules/tsdx/dist/createRollupConfig.js
+index d97884e..872a117 100644
+--- a/node_modules/tsdx/dist/createRollupConfig.js
++++ b/node_modules/tsdx/dist/createRollupConfig.js
+@@ -105,10 +105,11 @@ function createRollupConfig(format, env, opts) {
+                 rollup_plugin_terser_1.terser({
+                     sourcemap: true,
+                     output: { comments: false },
+-                    compress: {
+-                        keep_infinity: true,
+-                        pure_getters: true,
+-                    },
++                    // compress: {
++                    //     keep_infinity: true,
++                    //     pure_getters: true,
++                    // },
++                    compress: false,
+                     ecma: 5,
+                     toplevel: format === 'es' || format === 'cjs',
+                     warnings: true,
