@@ -1,7 +1,7 @@
 import React from "react"
-import { useNetlifyIdentity } from "react-netlify-identity"
 import { Login } from "./login"
-import { Logout } from "./logout"
+import { Logout } from "./components/logout"
+
 // import Modal from "./modal"
 // import SiteURLForm from "./forms/siteurl"
 // import LogoutForm from "./forms/logout"
@@ -59,28 +59,67 @@ import { IdentityContext } from "./context"
 // }
 
 function LoggedOutScreen() {
-  return <Login />
+  // return
+  return (
+    <>
+      <div className="header">
+        <button className="btn btnHeader ">Sign up</button>
+        <button className="btn btnHeader active">Log in</button>
+      </div>
+      <div>
+        <Login />
+        {/* <form className="form ">
+          <div className="formGroup">
+            <label>
+              <span className="visuallyHidden">Enter your email</span>
+              <input
+                className="formControl"
+                type="email"
+                name="email"
+                placeholder="Email"
+                autocapitalize="off"
+                required=""
+              />
+              <div className="inputFieldIcon inputFieldEmail" />
+            </label>
+          </div>
+          <div className="formGroup">
+            <label>
+              <span className="visuallyHidden">Enter your password</span>
+              <input className="formControl" type="password" name="password" placeholder="Password" required="" />
+              <div className="inputFieldIcon inputFieldPassword" />
+            </label>
+          </div>
+          <button type="submit" className="btn">
+            Log in
+          </button>
+        </form>
+        <button className="btnLink forgotPasswordLink">Forgot password?</button>
+         */}
+      </div>
+      <div className="providersGroup">
+        <hr className="hr" />
+        <button className="providerGoogle btn btnProvider">Continue with Google</button>
+        <button className="providerGitHub btn btnProvider">Continue with GitHub</button>
+        <button className="providerGitLab btn btnProvider">Continue with GitLab</button>
+        <button className="providerBitBucket btn btnProvider">Continue with BitBucket</button>
+      </div>
+    </>
+  )
 }
 function LoggedInScreen() {
   return <Logout />
 }
 
-function Gate() {
+function Gate({  }: { onCloseDialog: Function }) {
   const identity = React.useContext(IdentityContext)
   const isLoggedIn = Boolean(identity && identity.user)
   return isLoggedIn ? <LoggedInScreen /> : <LoggedOutScreen />
 }
 
-export function Widget({ netlifyInstance }: { netlifyInstance: string }) {
-  const identity = useNetlifyIdentity(netlifyInstance) // supply the url of your Netlify site instance. VERY IMPORTANT
-  return (
-    <IdentityContext.Provider value={identity}>
-      <Gate />
-    </IdentityContext.Provider>
-  )
+export function Widget({ onCloseDialog }: { onCloseDialog: Function }) {
+  return <Gate onCloseDialog={onCloseDialog} />
 }
-
-export const NetlifyIdentityContext = IdentityContext // for use in your React app
 
 // renderBody() {
 //   const { store } = this.props

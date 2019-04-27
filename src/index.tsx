@@ -5,8 +5,11 @@ import {
   DialogContent
 } from "@reach/dialog"
 import VisuallyHidden from "@reach/visually-hidden"
+import { Widget } from "./app"
+import { FormStateContextProvider } from "./context"
 
-import { Widget, NetlifyIdentityContext } from "./app"
+import { useNetlifyIdentity } from "react-netlify-identity"
+
 type ModalProps = {
   /** URL of your Netlify Instance with Identity enabled e.g. https://netlify-gotrue-in-react.netlify.com */
   netlifyInstance: string
@@ -15,6 +18,8 @@ type ModalProps = {
   /** modal will call this function to set the state of showDialog to false */
   onCloseDialog: () => void
 }
+
+import { IdentityContext as NetlifyIdentityContext } from "./context"
 export const IdentityContext = NetlifyIdentityContext
 export function IdentityModal({ showDialog, onCloseDialog, netlifyInstance }: ModalProps) {
   if (!netlifyInstance) {
@@ -26,6 +31,7 @@ export function IdentityModal({ showDialog, onCloseDialog, netlifyInstance }: Mo
           ". Please check the docs for proper usage or file an issue."
       )
   }
+  const identity = useNetlifyIdentity(netlifyInstance)
   return (
     <DialogOverlay isOpen={showDialog}>
       <DialogContent
@@ -38,10 +44,11 @@ export function IdentityModal({ showDialog, onCloseDialog, netlifyInstance }: Mo
           <VisuallyHidden>Close</VisuallyHidden>
           <span aria-hidden>×</span>
         </button>
-        <div>
-          widget
-          <Widget netlifyInstance={netlifyInstance} />
-        </div>
+        <FormStateContextProvider>
+          <IdentityContext.Provider value={identity}>
+            <Widget onCloseDialog={onCloseDialog} />
+          </IdentityContext.Provider>
+        </FormStateContextProvider>
       </DialogContent>
     </DialogOverlay>
   )
