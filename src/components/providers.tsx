@@ -1,13 +1,13 @@
 import React from "react"
-import { useIdentityContext } from "../context"
+import { useIdentityContext, SettingContext } from "../context"
 import { Settings } from "react-netlify-identity"
-export function Providers({ setting }: { setting: Settings | null }) {
+export function Providers() {
+  const setting = React.useContext(SettingContext)
   const hasProviders =
     setting &&
     setting.external &&
     Object.entries(setting.external).some(([k, v]) => ["github", "gitlab", "bitbucket", "google"].includes(k) && v)
   if (!hasProviders) return null
-  console.log({ setting })
   return (
     <div className="providersGroup">
       <hr className="hr" />

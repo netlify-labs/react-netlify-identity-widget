@@ -1,9 +1,11 @@
 import React from "react"
 import { useNetlifyIdentity } from "react-netlify-identity"
-
+import { Settings } from "react-netlify-identity"
 export const [useIdentityContext, IdentityContextProvider, IdentityContext] = createUsableCtx<
   ReturnType<typeof useNetlifyIdentity>
 >()
+
+export const SettingContext = React.createContext<Settings | null>(null)
 
 export const [FormStateContext, FormStateContextProvider] = createMutableCtx<"login" | "signup">("login")
 
