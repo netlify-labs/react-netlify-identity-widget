@@ -5,7 +5,7 @@ import "react-netlify-identity-widget/styles.css"
 
 function App() {
   const [dialog, setDialog] = React.useState(false)
-  const identity = useNetlifyIdentity("https://netlify-gotrue-in-react.netlify.com")
+  const identity = useNetlifyIdentity("https://react-netlify-identity-widget.netlify.com")
   const name =
     (identity && identity.user && identity.user.user_metadata && identity.user.user_metadata.name) || "NoName"
   return (
