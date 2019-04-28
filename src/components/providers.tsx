@@ -14,7 +14,7 @@ export function Providers({ setting }: { setting: Settings | null }) {
       <ProviderButton setting={setting} provider="Google" />
       <ProviderButton setting={setting} provider="GitHub" />
       <ProviderButton setting={setting} provider="GitLab" />
-      <ProviderButton setting={setting} provider="BitBucket" />
+      <ProviderButton setting={setting} provider="Bitbucket" />
     </div>
   )
 }
@@ -25,7 +25,7 @@ interface Dict<T> {
 function ProviderButton({ setting, provider }: { setting: Settings | null; provider: string }) {
   if (!setting) return null
   const ext = setting.external as Dict<{}>
-  if (ext[provider.toLowerCase()]) return null
+  if (!ext[provider.toLowerCase()]) return null
   const { loginProvider } = useIdentityContext()
   const click = () => loginProvider(provider.toLowerCase() as "github" | "gitlab" | "bitbucket" | "google")
   return (
