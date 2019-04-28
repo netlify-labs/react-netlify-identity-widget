@@ -10,10 +10,10 @@ export function Signup() {
   const [isLoading, load] = useLoading()
   const signup = () => {
     if (!formRef.current) return
-    const name = formRef.current.username.value
+    const full_name = formRef.current.username.value
     const email = formRef.current.email.value
     const password = formRef.current.password.value
-    const data = { signupSource: "react-netlify-identity-widget", name }
+    const data = { signupSource: "react-netlify-identity-widget", full_name }
     load(signupUser(email, password, data))
       .then(user => {
         console.log("Success! Signed up", user)
