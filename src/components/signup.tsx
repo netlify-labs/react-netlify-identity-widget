@@ -10,9 +10,10 @@ export function Signup() {
   const [isLoading, load] = useLoading()
   const signup = () => {
     if (!formRef.current) return
+    const name = formRef.current.username.value
     const email = formRef.current.email.value
     const password = formRef.current.password.value
-    const data = { signupSource: "react-netlify-identity-widget" }
+    const data = { signupSource: "react-netlify-identity-widget", name }
     load(signupUser(email, password, data))
       .then(user => {
         console.log("Success! Signed up", user)
@@ -29,13 +30,14 @@ export function Signup() {
         signup()
       }}
     >
-      <div className="formGroup">
+      <div className="formGroup" key="username">
         <label>
           <VisuallyHidden>Enter your name</VisuallyHidden>
           <input
+            id="username"
             className="formControl"
             type="name"
-            name="name"
+            name="username"
             placeholder="Name"
             autoCapitalize="off"
             required={true}
@@ -43,10 +45,11 @@ export function Signup() {
           <div className="inputFieldIcon inputFieldName" />
         </label>
       </div>
-      <div className="formGroup">
+      <div className="formGroup" key="email">
         <label>
           <VisuallyHidden>Enter your email</VisuallyHidden>
           <input
+            id="email"
             className="formControl"
             type="email"
             name="email"
@@ -57,20 +60,25 @@ export function Signup() {
           <div className="inputFieldIcon inputFieldEmail" />
         </label>
       </div>
-      <div className="formGroup">
+      <div className="formGroup" key="password">
         <label>
           <VisuallyHidden>Enter your password</VisuallyHidden>
-          <input className="formControl" type="password" name="password" placeholder="Password" required={true} />
+          <input
+            id="password"
+            className="formControl"
+            type="password"
+            name="password"
+            placeholder="Password"
+            required={true}
+          />
           <div className="inputFieldIcon inputFieldPassword" />
         </label>
       </div>
-
       <div>
-        {isLoading && "loading..."}
-        <button type="submit" className="btn">
+        <button type="submit" className={isLoading ? "btn saving" : "btn"}>
           Sign Up
         </button>
-        {msg && <pre>{msg}</pre>}
+        {msg && <pre style={{ background: "salmon", padding: 10 }}>{msg}</pre>}
       </div>
     </form>
   )

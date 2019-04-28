@@ -37,10 +37,11 @@ export function Login() {
           .catch(err => void console.error(err) || setMsg("Error: " + err.message))
       }}
     >
-      <div className="formGroup">
+      <div className="formGroup" key="email">
         <label>
           <VisuallyHidden>Enter your email</VisuallyHidden>
           <input
+            id="email"
             className="formControl"
             type="email"
             name="email"
@@ -51,20 +52,26 @@ export function Login() {
           <div className="inputFieldIcon inputFieldEmail" />
         </label>
       </div>
-      <div className="formGroup">
+      <div className="formGroup" key="password">
         <label>
           <VisuallyHidden>Enter your password</VisuallyHidden>
-          <input className="formControl" type="password" name="password" placeholder="Password" required={true} />
+          <input
+            id="password"
+            className="formControl"
+            type="password"
+            name="password"
+            placeholder="Password"
+            required={true}
+          />
           <div className="inputFieldIcon inputFieldPassword" />
         </label>
       </div>
 
       <div>
-        {isLoading && "loading..."}
-        <button type="submit" className="btn">
+        <button type="submit" className={isLoading ? "btn saving" : "btn"}>
           Log in
         </button>
-        {msg && <pre>{msg}</pre>}
+        {msg && <pre style={{ background: "salmon", padding: 10 }}>{msg}</pre>}
       </div>
       <button type="button" className="btnLink forgotPasswordLink">
         Forgot password?

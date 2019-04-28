@@ -1,9 +1,11 @@
 import React from "react"
 import { useIdentityContext } from "../context"
+import useLoading from "../useLoading"
 
 export function Logout() {
   const identity = useIdentityContext()
-  console.log({ identity })
+  const [isLoading, load] = useLoading()
+  const logout = () => load(identity.logoutUser())
   return (
     <>
       <div className="header">
@@ -14,7 +16,7 @@ export function Logout() {
           Logged in as <br />
           <span className="infoTextEmail">Shawn Wang</span>
         </p>
-        <button type="submit" className="btn">
+        <button type="submit" className={isLoading ? "btn saving" : "btn"} onClick={logout}>
           Log out
         </button>
       </form>

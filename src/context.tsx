@@ -1,7 +1,9 @@
 import React from "react"
 import { useNetlifyIdentity } from "react-netlify-identity"
 
-export const [useIdentityContext, IdentityContextProvider] = createUsableCtx<ReturnType<typeof useNetlifyIdentity>>()
+export const [useIdentityContext, IdentityContextProvider, IdentityContext] = createUsableCtx<
+  ReturnType<typeof useNetlifyIdentity>
+>()
 
 export const [FormStateContext, FormStateContextProvider] = createMutableCtx<"login" | "signup">("login")
 
@@ -25,5 +27,5 @@ function createUsableCtx<A>() {
     if (!c) throw new Error("useCtx must be inside a Provider with a value")
     return c
   }
-  return [useCtx, ctx.Provider] as const
+  return [useCtx, ctx.Provider, ctx] as const
 }

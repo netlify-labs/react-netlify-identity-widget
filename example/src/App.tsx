@@ -1,31 +1,35 @@
 import React from "react"
-import logo from "./logo.svg"
 import "./App.css"
-import { IdentityModal, useIdentityContext } from "react-netlify-identity-widget"
+import { IdentityModal, useNetlifyIdentity, IdentityContextProvider } from "react-netlify-identity-widget"
 import "react-netlify-identity-widget/styles.css"
 
 function App() {
   const [dialog, setDialog] = React.useState(false)
-  const identity = useIdentityContext
-  console.log("login status can be used anywhere in app", identity)
+  const identity = useNetlifyIdentity("https://netlify-gotrue-in-react.netlify.com")
+  const name =
+    (identity && identity.user && identity.user.user_metadata && identity.user.user_metadata.name) || "NoName"
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-          Learn React
-        </a>
-        <button onClick={() => setDialog(true)}>open modal</button>
-        <IdentityModal
-          netlifyInstance="https://netlify-gotrue-in-react.netlify.com"
-          showDialog={dialog}
-          onCloseDialog={() => setDialog(false)}
-        />
-      </header>
-    </div>
+    <IdentityContextProvider value={identity}>
+      <div className="App">
+        {identity && identity.isLoggedIn ? (
+          <header className="App-header">
+            <h1> hello {name}!</h1>
+            <button className="btn" style={{ maxWidth: 400, background: "orangered" }} onClick={() => setDialog(true)}>
+              LOG OUT
+            </button>
+            <IdentityModal showDialog={dialog} onCloseDialog={() => setDialog(false)} />
+          </header>
+        ) : (
+          <header className="App-header">
+            <h1> hello! try logging in! </h1>
+            <button className="btn" style={{ maxWidth: 400, background: "darkgreen" }} onClick={() => setDialog(true)}>
+              LOG IN
+            </button>
+            <IdentityModal showDialog={dialog} onCloseDialog={() => setDialog(false)} />
+          </header>
+        )}
+      </div>
+    </IdentityContextProvider>
   )
 }
 
