@@ -1,14 +1,9 @@
 import React from "react"
-import { Login } from "./login"
+import { Login } from "./components/login"
 import { Logout } from "./components/logout"
-
-// import Modal from "./modal"
-// import SiteURLForm from "./forms/siteurl"
-// import LogoutForm from "./forms/logout"
-// import UserForm from "./forms/user"
-// import Providers from "./forms/providers"
-// import Message from "./forms/message"
-import { IdentityContext } from "./context"
+import { Signup } from "./components/signup"
+import { useIdentityContext } from "./context"
+import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@reach/tabs"
 // const pagesWithHeader = { login: true, signup: true }
 // const pages = {
 //   login: {
@@ -61,14 +56,32 @@ import { IdentityContext } from "./context"
 function LoggedOutScreen() {
   // return
   return (
-    <>
-      <div className="header">
-        <button className="btn btnHeader ">Sign up</button>
-        <button className="btn btnHeader active">Log in</button>
+    <div>
+      <Tabs defaultIndex={0}>
+        <TabList className="header">
+          <Tab className="btn btnHeader ">Login</Tab>
+          <Tab className="btn btnHeader ">Sign Up</Tab>
+        </TabList>
+
+        <TabPanels>
+          <TabPanel>
+            <Login />
+          </TabPanel>
+          <TabPanel>
+            <Signup />
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
+
+      <div className="providersGroup">
+        <hr className="hr" />
+        <button className="providerGoogle btn btnProvider">Continue with Google</button>
+        <button className="providerGitHub btn btnProvider">Continue with GitHub</button>
+        <button className="providerGitLab btn btnProvider">Continue with GitLab</button>
+        <button className="providerBitBucket btn btnProvider">Continue with BitBucket</button>
       </div>
-      <div>
-        <Login />
-        {/* <form className="form ">
+
+      {/* <form className="form ">
           <div className="formGroup">
             <label>
               <span className="visuallyHidden">Enter your email</span>
@@ -96,15 +109,7 @@ function LoggedOutScreen() {
         </form>
         <button className="btnLink forgotPasswordLink">Forgot password?</button>
          */}
-      </div>
-      <div className="providersGroup">
-        <hr className="hr" />
-        <button className="providerGoogle btn btnProvider">Continue with Google</button>
-        <button className="providerGitHub btn btnProvider">Continue with GitHub</button>
-        <button className="providerGitLab btn btnProvider">Continue with GitLab</button>
-        <button className="providerBitBucket btn btnProvider">Continue with BitBucket</button>
-      </div>
-    </>
+    </div>
   )
 }
 function LoggedInScreen() {
@@ -112,7 +117,7 @@ function LoggedInScreen() {
 }
 
 function Gate({  }: { onCloseDialog: Function }) {
-  const identity = React.useContext(IdentityContext)
+  const identity = useIdentityContext()
   const isLoggedIn = Boolean(identity && identity.user)
   return isLoggedIn ? <LoggedInScreen /> : <LoggedOutScreen />
 }

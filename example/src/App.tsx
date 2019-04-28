@@ -1,12 +1,12 @@
 import React from "react"
 import logo from "./logo.svg"
 import "./App.css"
-import { IdentityModal, IdentityContext } from "react-netlify-identity-widget"
+import { IdentityModal, useIdentityContext } from "react-netlify-identity-widget"
 import "react-netlify-identity-widget/styles.css"
 
 function App() {
   const [dialog, setDialog] = React.useState(false)
-  const identity = React.useContext(IdentityContext)
+  const identity = useIdentityContext
   console.log("login status can be used anywhere in app", identity)
   return (
     <div className="App">

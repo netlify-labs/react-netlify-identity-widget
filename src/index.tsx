@@ -19,8 +19,9 @@ type ModalProps = {
   onCloseDialog: () => void
 }
 
-import { IdentityContext as NetlifyIdentityContext } from "./context"
-export const IdentityContext = NetlifyIdentityContext
+import { IdentityContextProvider, useIdentityContext as _useIdentityContext } from "./context"
+
+export const useIdentityContext = _useIdentityContext
 export function IdentityModal({ showDialog, onCloseDialog, netlifyInstance }: ModalProps) {
   if (!netlifyInstance) {
     // just a safety check in case a JS user tries to skip this
@@ -37,17 +38,18 @@ export function IdentityModal({ showDialog, onCloseDialog, netlifyInstance }: Mo
       <DialogContent
         style={{
           border: "solid 5px hsla(0, 0%, 0%, 0.5)",
-          borderRadius: "10px"
+          borderRadius: "10px",
+          position: "relative",
+          maxWidth: 364
         }}
       >
-        <button className="close-button" onClick={onCloseDialog}>
+        <button className="btn btnClose" onClick={onCloseDialog}>
           <VisuallyHidden>Close</VisuallyHidden>
-          <span aria-hidden>×</span>
         </button>
         <FormStateContextProvider>
-          <IdentityContext.Provider value={identity}>
+          <IdentityContextProvider value={identity}>
             <Widget onCloseDialog={onCloseDialog} />
-          </IdentityContext.Provider>
+          </IdentityContextProvider>
         </FormStateContextProvider>
       </DialogContent>
     </DialogOverlay>

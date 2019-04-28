@@ -1,21 +1,29 @@
 import React from "react"
 import { useNetlifyIdentity } from "react-netlify-identity"
 
-export const IdentityContext = React.createContext<ReturnType<typeof useNetlifyIdentity> | undefined>(undefined) // not necessary but recommended
+export const [useIdentityContext, IdentityContextProvider] = createUsableCtx<ReturnType<typeof useNetlifyIdentity>>()
 
-const { ctx, Provider } = createCtx<"login" | "signup">("login")
+export const [FormStateContext, FormStateContextProvider] = createMutableCtx<"login" | "signup">("login")
 
-export const FormStateContext = ctx
-export const FormStateContextProvider = Provider
+// utils
 
-function createCtx<A>(defaultValue: A) {
+function createMutableCtx<A>(defaultValue: A) {
   type UpdateType = React.Dispatch<React.SetStateAction<typeof defaultValue>>
   const defaultUpdate: UpdateType = () => defaultValue
   const ctx = React.createContext({ state: defaultValue, update: defaultUpdate })
-  function Provider({ children }: { children: React.ReactNode }) {
+  function Provider(props: React.PropsWithChildren<{}>) {
     const [state, update] = React.useState(defaultValue)
-    return <ctx.Provider value={{ state, update }}>{children}</ctx.Provider>
+    return <ctx.Provider value={{ state, update }} {...props} />
   }
-  // return [ctx, Provider] as [typeof ctx, typeof Provider]
-  return { ctx, Provider }
+  return [ctx, Provider] as const
+}
+
+function createUsableCtx<A>() {
+  const ctx = React.createContext<A | undefined>(undefined)
+  function useCtx() {
+    const c = React.useContext(ctx)
+    if (!c) throw new Error("useCtx must be inside a Provider with a value")
+    return c
+  }
+  return [useCtx, ctx.Provider] as const
 }

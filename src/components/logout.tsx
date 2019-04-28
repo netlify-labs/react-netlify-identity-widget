@@ -1,10 +1,9 @@
 import React from "react"
-import { IdentityContext } from "../context"
+import { useIdentityContext } from "../context"
 
 export function Logout() {
-  const identity = React.useContext(IdentityContext)
-  if (!identity) throw new Error("bad context")
-
+  const identity = useIdentityContext()
+  console.log({ identity })
   return (
     <>
       <div className="header">
