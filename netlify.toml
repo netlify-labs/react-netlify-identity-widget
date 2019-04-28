@@ -1,8 +1,8 @@
 # example netlify.toml
 [build]
-  command = "cd example && yarn build"
+  command = "yarn link && cd example && yarn && yarn link react-netlify-identity-widget && yarn build"
   functions = "functions"
-  publish = "cd example/build"
+  publish = "example/build"
 
   ## Uncomment to use this redirect for Single Page Applications like create-react-app. 
   ## Not needed for static site generators.
