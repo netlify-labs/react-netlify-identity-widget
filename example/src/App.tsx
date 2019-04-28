@@ -19,6 +19,14 @@ function App() {
             <button className="btn" style={{ maxWidth: 400, background: "orangered" }} onClick={() => setDialog(true)}>
               LOG OUT
             </button>
+
+            <h3>
+              Or{" "}
+              <a href="https://github.com/sw-yx/react-netlify-identity-widget" target="_blank">
+                view the source
+              </a>
+            </h3>
+
             <IdentityModal showDialog={dialog} onCloseDialog={() => setDialog(false)} />
           </header>
         ) : (
