@@ -7,6 +7,7 @@ export function Providers({ setting }: { setting: Settings | null }) {
     setting.external &&
     Object.entries(setting.external).some(([k, v]) => ["github", "gitlab", "bitbucket", "google"].includes(k) && v)
   if (!hasProviders) return null
+  console.log({ setting })
   return (
     <div className="providersGroup">
       <hr className="hr" />
@@ -26,7 +27,7 @@ function ProviderButton({ setting, provider }: { setting: Settings | null; provi
   const ext = setting.external as Dict<{}>
   if (ext[provider.toLowerCase()]) return null
   const { loginProvider } = useIdentityContext()
-  const click = () => loginProvider(provider.toLowerCase() as "github" | "gitlab" | "bitbucket" | "google" | "facebook")
+  const click = () => loginProvider(provider.toLowerCase() as "github" | "gitlab" | "bitbucket" | "google")
   return (
     <button onClick={click} className={`provider${provider} btn btnProvider`}>
       Continue with {provider}

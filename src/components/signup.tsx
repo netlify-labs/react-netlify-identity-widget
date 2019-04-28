@@ -49,7 +49,6 @@ export function Signup() {
         <label>
           <VisuallyHidden>Enter your email</VisuallyHidden>
           <input
-            id="email"
             className="formControl"
             type="email"
             name="email"
@@ -63,14 +62,7 @@ export function Signup() {
       <div className="formGroup" key="password">
         <label>
           <VisuallyHidden>Enter your password</VisuallyHidden>
-          <input
-            id="password"
-            className="formControl"
-            type="password"
-            name="password"
-            placeholder="Password"
-            required={true}
-          />
+          <input className="formControl" type="password" name="password" placeholder="Password" required={true} />
           <div className="inputFieldIcon inputFieldPassword" />
         </label>
       </div>
