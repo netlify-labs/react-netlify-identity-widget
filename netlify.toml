@@ -1,7 +1,7 @@
 # example netlify.toml
 [build]
   # command = "yarn link && cd example && yarn && yarn link react-netlify-identity-widget && yarn build"
-  command = "cd example && yarn && yarn add react-netlify-identity-widget && yarn build"
+  command = "cd example && yarn && yarn build"
   functions = "functions"
   publish = "example/build"
 
