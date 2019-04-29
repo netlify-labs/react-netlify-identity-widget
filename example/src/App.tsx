@@ -12,35 +12,44 @@ function App() {
   return (
     <IdentityContextProvider value={identity}>
       <div className="App">
-        {identity && identity.isLoggedIn ? (
-          <header className="App-header">
-            <h1> hello {name}!</h1>
-            {avatar_url && <img src={avatar_url} style={{ height: 100, borderRadius: "50%" }} />}
-            <button className="btn" style={{ maxWidth: 400, background: "orangered" }} onClick={() => setDialog(true)}>
-              LOG OUT
-            </button>
-
-            <IdentityModal showDialog={dialog} onCloseDialog={() => setDialog(false)} />
-          </header>
-        ) : (
-          <header className="App-header">
-            <h1> hello! try logging in! </h1>
-            <button className="btn" style={{ maxWidth: 400, background: "darkgreen" }} onClick={() => setDialog(true)}>
-              LOG IN
-            </button>
-            <IdentityModal showDialog={dialog} onCloseDialog={() => setDialog(false)} />
-          </header>
-        )}
-        <h3>
-          Or{" "}
-          <a
-            href="https://github.com/sw-yx/react-netlify-identity-widget"
-            target="_blank"
-            style={{ color: "powderblue" }}
-          >
-            view the source
-          </a>
-        </h3>
+        <header className="App-header">
+          {identity && identity.isLoggedIn ? (
+            <>
+              <h1> hello {name}!</h1>
+              {avatar_url && <img src={avatar_url} style={{ height: 100, borderRadius: "50%" }} />}
+              <button
+                className="btn"
+                style={{ maxWidth: 400, background: "orangered" }}
+                onClick={() => setDialog(true)}
+              >
+                LOG OUT
+              </button>
+              <IdentityModal showDialog={dialog} onCloseDialog={() => setDialog(false)} />
+            </>
+          ) : (
+            <>
+              <h1> hello! try logging in! </h1>
+              <button
+                className="btn"
+                style={{ maxWidth: 400, background: "darkgreen" }}
+                onClick={() => setDialog(true)}
+              >
+                LOG IN
+              </button>
+              <IdentityModal showDialog={dialog} onCloseDialog={() => setDialog(false)} />
+            </>
+          )}
+          <h3>
+            Or{" "}
+            <a
+              href="https://github.com/sw-yx/react-netlify-identity-widget"
+              target="_blank"
+              style={{ color: "powderblue" }}
+            >
+              view the source
+            </a>
+          </h3>
+        </header>
       </div>
     </IdentityContextProvider>
   )
