@@ -20,13 +20,6 @@ function App() {
               LOG OUT
             </button>
 
-            <h3>
-              Or{" "}
-              <a href="https://github.com/sw-yx/react-netlify-identity-widget" target="_blank">
-                view the source
-              </a>
-            </h3>
-
             <IdentityModal showDialog={dialog} onCloseDialog={() => setDialog(false)} />
           </header>
         ) : (
@@ -38,6 +31,16 @@ function App() {
             <IdentityModal showDialog={dialog} onCloseDialog={() => setDialog(false)} />
           </header>
         )}
+        <h3>
+          Or{" "}
+          <a
+            href="https://github.com/sw-yx/react-netlify-identity-widget"
+            target="_blank"
+            style={{ color: "powderblue" }}
+          >
+            view the source
+          </a>
+        </h3>
       </div>
     </IdentityContextProvider>
   )
