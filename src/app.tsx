@@ -39,6 +39,6 @@ function Gate({  }: { onCloseDialog: Function }) {
   return isLoggedIn ? <LoggedInScreen /> : <LoggedOutScreen />
 }
 
-export function Widget({ onCloseDialog }: { onCloseDialog: Function }) {
+export default function Widget({ onCloseDialog }: { onCloseDialog: Function }) {
   return <Gate onCloseDialog={onCloseDialog} />
 }

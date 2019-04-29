@@ -4,7 +4,9 @@ import {
   // DialogOverlay, DialogContent
 } from "@reach/dialog"
 import VisuallyHidden from "@reach/visually-hidden"
-import { Widget } from "./app"
+
+const Widget = React.lazy(() => import("./app"))
+
 import { FormStateContextProvider, SettingContext } from "./context"
 
 import { Settings, useNetlifyIdentity as _useNetlifyIdentity } from "react-netlify-identity"
@@ -50,7 +52,9 @@ export function IdentityModal({ showDialog, onCloseDialog }: ModalProps) {
           <VisuallyHidden>Close</VisuallyHidden>
         </button>
         <FormStateContextProvider>
-          <Widget onCloseDialog={onCloseDialog} />
+          <React.Suspense fallback={<div>Loading...</div>}>
+            <Widget onCloseDialog={onCloseDialog} />
+          </React.Suspense>
         </FormStateContextProvider>
       </Dialog>
     </SettingContext.Provider>
