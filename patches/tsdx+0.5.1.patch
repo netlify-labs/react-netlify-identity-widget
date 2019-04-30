@@ -1,0 +1,310 @@
+diff --git a/node_modules/tsdx/dist/.progress-estimator/5e1a1bc72a1c85f144986cb7aa3d91e6fd42e1c4 b/node_modules/tsdx/dist/.progress-estimator/5e1a1bc72a1c85f144986cb7aa3d91e6fd42e1c4
+index e42ad0b..4d6c613 100644
+--- a/node_modules/tsdx/dist/.progress-estimator/5e1a1bc72a1c85f144986cb7aa3d91e6fd42e1c4
++++ b/node_modules/tsdx/dist/.progress-estimator/5e1a1bc72a1c85f144986cb7aa3d91e6fd42e1c4
+@@ -1,10 +1,10 @@
+-1536
+-1364
+-1387
+-1319
+-1381
+-1586
+ 1337
+ 1720
+ 2034
+ 1734
++18255
++3347
++5822
++5980
++5152
++3961
+\ No newline at end of file
+diff --git a/node_modules/tsdx/dist/.progress-estimator/9a3492e73be0eb3875889eb84075f018f90b4f72 b/node_modules/tsdx/dist/.progress-estimator/9a3492e73be0eb3875889eb84075f018f90b4f72
+index 01545b4..b836627 100644
+--- a/node_modules/tsdx/dist/.progress-estimator/9a3492e73be0eb3875889eb84075f018f90b4f72
++++ b/node_modules/tsdx/dist/.progress-estimator/9a3492e73be0eb3875889eb84075f018f90b4f72
+@@ -1,10 +1,10 @@
+-2474
+-2440
+-2823
+-3006
+-3154
+-3046
+-2805
+ 3105
+ 4198
+ 3417
++5431
++3435
++3721
++3920
++4273
++5397
++3853
+\ No newline at end of file
+diff --git a/node_modules/tsdx/dist/createRollupConfig.js b/node_modules/tsdx/dist/createRollupConfig.js
+index 07ee4e4..4a391a5 100644
+--- a/node_modules/tsdx/dist/createRollupConfig.js
++++ b/node_modules/tsdx/dist/createRollupConfig.js
+@@ -1,124 +1,143 @@
+-"use strict";
+-Object.defineProperty(exports, "__esModule", { value: true });
+-const tslib_1 = require("tslib");
+-const utils_1 = require("./utils");
+-const constants_1 = require("./constants");
+-const rollup_plugin_size_snapshot_1 = require("rollup-plugin-size-snapshot");
+-const rollup_plugin_terser_1 = require("rollup-plugin-terser");
+-const rollup_plugin_babel_1 = tslib_1.__importDefault(require("rollup-plugin-babel"));
+-const rollup_plugin_commonjs_1 = tslib_1.__importDefault(require("rollup-plugin-commonjs"));
+-const rollup_plugin_json_1 = tslib_1.__importDefault(require("rollup-plugin-json"));
+-const rollup_plugin_replace_1 = tslib_1.__importDefault(require("rollup-plugin-replace"));
+-const rollup_plugin_node_resolve_1 = tslib_1.__importDefault(require("rollup-plugin-node-resolve"));
+-const rollup_plugin_sourcemaps_1 = tslib_1.__importDefault(require("rollup-plugin-sourcemaps"));
+-const rollup_plugin_typescript2_1 = tslib_1.__importDefault(require("rollup-plugin-typescript2"));
+-const rollup_plugin_preserve_shebang_1 = tslib_1.__importDefault(require("@jaredpalmer/rollup-plugin-preserve-shebang"));
++'use strict';
++Object.defineProperty(exports, '__esModule', { value: true });
++const tslib_1 = require('tslib');
++const utils_1 = require('./utils');
++const constants_1 = require('./constants');
++const rollup_plugin_size_snapshot_1 = require('rollup-plugin-size-snapshot');
++const rollup_plugin_terser_1 = require('rollup-plugin-terser');
++const rollup_plugin_babel_1 = tslib_1.__importDefault(
++  require('rollup-plugin-babel')
++);
++const rollup_plugin_commonjs_1 = tslib_1.__importDefault(
++  require('rollup-plugin-commonjs')
++);
++const rollup_plugin_json_1 = tslib_1.__importDefault(
++  require('rollup-plugin-json')
++);
++const rollup_plugin_replace_1 = tslib_1.__importDefault(
++  require('rollup-plugin-replace')
++);
++const rollup_plugin_node_resolve_1 = tslib_1.__importDefault(
++  require('rollup-plugin-node-resolve')
++);
++const rollup_plugin_sourcemaps_1 = tslib_1.__importDefault(
++  require('rollup-plugin-sourcemaps')
++);
++const rollup_plugin_typescript2_1 = tslib_1.__importDefault(
++  require('rollup-plugin-typescript2')
++);
++const rollup_plugin_preserve_shebang_1 = tslib_1.__importDefault(
++  require('@jaredpalmer/rollup-plugin-preserve-shebang')
++);
+ const replacements = [{ original: 'lodash', replacement: 'lodash-es' }];
+ const babelOptions = {
+-    exclude: /node_modules/,
+-    plugins: [
+-        'annotate-pure-calls',
+-        'dev-expression',
+-        ['transform-rename-import', { replacements }],
+-    ],
++  exclude: /node_modules/,
++  plugins: [
++    'annotate-pure-calls',
++    'dev-expression',
++    ['transform-rename-import', { replacements }],
++  ],
+ };
+ function createRollupConfig(format, env, opts) {
+-    let shebang;
+-    return {
+-        // Tell Rollup the entry point to the package
+-        input: opts.input,
+-        // Tell Rollup which packages to ignore
+-        external: utils_1.external,
+-        // Establish Rollup output
+-        output: {
+-            // Set filenames of the consumer's package
+-            file: `${constants_1.paths.appDist}/${utils_1.safePackageName(opts.name)}.${format}.${env}.js`,
+-            // Pass through the file format
+-            format,
+-            // Do not let Rollup call Object.freeze() on namespace import objects
+-            // (i.e. import * as namespaceImportObject from...) that are accessed dynamically.
+-            freeze: false,
+-            // Do not let Rollup add a `__esModule: true` property when generating exports for non-ESM formats.
+-            esModule: false,
+-            // Rollup has treeshaking by default, but we can optimize it further...
+-            treeshake: {
+-                // We assume reading a property of an object never has side-effects.
+-                // This means tsdx WILL remove getters and setters on objects.
+-                //
+-                // @example
+-                //
+-                // const foo = {
+-                //  get bar() {
+-                //    console.log('effect');
+-                //    return 'bar';
+-                //  }
+-                // }
+-                //
+-                // const result = foo.bar;
+-                // const illegalAccess = foo.quux.tooDeep;
+-                //
+-                // Punchline....Don't use getters and setters
+-                propertyReadSideEffects: false,
+-            },
+-            name: opts.name || utils_1.safeVariableName(opts.name),
+-            sourcemap: true,
+-            globals: { react: 'React', 'react-native': 'ReactNative' },
+-            exports: 'named',
++  let shebang;
++  return {
++    // Tell Rollup the entry point to the package
++    input: opts.input,
++    // Tell Rollup which packages to ignore
++    external: utils_1.external,
++    // Establish Rollup output
++    output: {
++      // Set filenames of the consumer's package
++      file: `${constants_1.paths.appDist}/${utils_1.safePackageName(
++        opts.name
++      )}.${format}.${env}.js`,
++      // Pass through the file format
++      format,
++      // Do not let Rollup call Object.freeze() on namespace import objects
++      // (i.e. import * as namespaceImportObject from...) that are accessed dynamically.
++      freeze: false,
++      // Do not let Rollup add a `__esModule: true` property when generating exports for non-ESM formats.
++      esModule: false,
++      // Rollup has treeshaking by default, but we can optimize it further...
++      treeshake: {
++        // We assume reading a property of an object never has side-effects.
++        // This means tsdx WILL remove getters and setters on objects.
++        //
++        // @example
++        //
++        // const foo = {
++        //  get bar() {
++        //    console.log('effect');
++        //    return 'bar';
++        //  }
++        // }
++        //
++        // const result = foo.bar;
++        // const illegalAccess = foo.quux.tooDeep;
++        //
++        // Punchline....Don't use getters and setters
++        propertyReadSideEffects: false,
++      },
++      name: opts.name || utils_1.safeVariableName(opts.name),
++      sourcemap: true,
++      globals: { react: 'React', 'react-native': 'ReactNative' },
++      exports: 'named',
++    },
++    plugins: [
++      rollup_plugin_node_resolve_1.default({
++        mainFields: [
++          'module',
++          'main',
++          opts.target !== 'node' ? 'browser' : undefined,
++        ].filter(Boolean),
++      }),
++      format === 'umd' &&
++        rollup_plugin_commonjs_1.default({
++          // use a regex to make sure to include eventual hoisted packages
++          include: /\/node_modules\//,
++        }),
++      rollup_plugin_json_1.default(),
++      rollup_plugin_typescript2_1.default({
++        typescript: require('typescript'),
++        cacheRoot: `./.rts2_cache_${format}`,
++        tsconfigDefaults: {
++          compilerOptions: {
++            sourceMap: true,
++            declaration: true,
++            jsx: 'react',
++          },
+         },
+-        plugins: [
+-            rollup_plugin_node_resolve_1.default({
+-                mainFields: [
+-                    'module',
+-                    'main',
+-                    opts.target !== 'node' ? 'browser' : undefined,
+-                ].filter(Boolean),
+-            }),
+-            format === 'umd' &&
+-                rollup_plugin_commonjs_1.default({
+-                    // use a regex to make sure to include eventual hoisted packages
+-                    include: /\/node_modules\//,
+-                }),
+-            rollup_plugin_json_1.default(),
+-            rollup_plugin_typescript2_1.default({
+-                typescript: require('typescript'),
+-                cacheRoot: `./.rts2_cache_${format}`,
+-                tsconfigDefaults: {
+-                    compilerOptions: {
+-                        sourceMap: true,
+-                        declaration: true,
+-                        jsx: 'react',
+-                    },
+-                },
+-                tsconfigOverride: {
+-                    compilerOptions: {
+-                        target: 'esnext',
+-                    },
+-                },
+-            }),
+-            rollup_plugin_babel_1.default(babelOptions),
+-            rollup_plugin_replace_1.default({
+-                'process.env.NODE_ENV': JSON.stringify(env),
+-            }),
+-            rollup_plugin_sourcemaps_1.default(),
+-            rollup_plugin_size_snapshot_1.sizeSnapshot({
+-                printInfo: false,
+-            }),
+-            env === 'production' &&
+-                rollup_plugin_terser_1.terser({
+-                    sourcemap: true,
+-                    output: { comments: false },
+-                    compress: {
+-                        keep_infinity: true,
+-                        pure_getters: true,
+-                    },
+-                    ecma: 5,
+-                    toplevel: format === 'es' || format === 'cjs',
+-                    warnings: true,
+-                }),
+-            rollup_plugin_preserve_shebang_1.default({
+-                shebang,
+-            }),
+-        ],
+-    };
++        tsconfigOverride: {
++          compilerOptions: {
++            target: 'esnext',
++          },
++        },
++      }),
++      rollup_plugin_babel_1.default(babelOptions),
++      rollup_plugin_replace_1.default({
++        'process.env.NODE_ENV': JSON.stringify(env),
++      }),
++      rollup_plugin_sourcemaps_1.default(),
++      rollup_plugin_size_snapshot_1.sizeSnapshot({
++        printInfo: false,
++      }),
++      env === 'production' &&
++        rollup_plugin_terser_1.terser({
++          sourcemap: true,
++          output: { comments: false },
++          compress: {
++            keep_infinity: true,
++            pure_getters: true,
++            collapse_vars: false,
++          },
++          ecma: 5,
++          toplevel: format === 'es' || format === 'cjs',
++          warnings: true,
++        }),
++      rollup_plugin_preserve_shebang_1.default({
++        shebang,
++      }),
++    ],
++  };
+ }
+ exports.createRollupConfig = createRollupConfig;

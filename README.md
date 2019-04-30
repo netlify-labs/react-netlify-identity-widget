@@ -1,6 +1,6 @@
 # React Netlify Identity Widget
 
-This is a React port of https://github.com/netlify/netlify-identity-widget (48kb) taking the lightweight functionality https://github.com/sw-yx/react-netlify-identity (4kb) and adding back the nicer UI with a focus on accessibility (with @reach UI) and bundle size.
+This is a React port of https://github.com/netlify/netlify-identity-widget (48kb), taking the lightweight functionality of https://github.com/sw-yx/react-netlify-identity (4kb) and adding back the nicer UI with a focus on accessibility (with @reach UI) and bundle size (only 6kb as of writing).
 
 # demo
 
@@ -21,8 +21,10 @@ and the styles are optional but provided. here's how to use `IdentityModal, useN
 ```tsx
 import React from "react"
 import "./App.css"
-import { IdentityModal, useNetlifyIdentity, IdentityContextProvider } from "react-netlify-identity-widget"
+import { useNetlifyIdentity, IdentityContextProvider } from "react-netlify-identity-widget"
 import "react-netlify-identity-widget/styles.css"
+
+const IdentityModal = React.lazy(() => import("react-netlify-identity-widget"))
 
 function App() {
   const [dialog, setDialog] = React.useState(false)
@@ -38,7 +40,6 @@ function App() {
             <button className="btn" onClick={() => setDialog(true)}>
               LOG OUT
             </button>
-            <IdentityModal showDialog={dialog} onCloseDialog={() => setDialog(false)} />
           </header>
         ) : (
           <header className="App-header">
@@ -46,9 +47,11 @@ function App() {
             <button className="btn" onClick={() => setDialog(true)}>
               LOG IN
             </button>
-            <IdentityModal showDialog={dialog} onCloseDialog={() => setDialog(false)} />
           </header>
         )}
+        <React.Suspense fallback="loading...">
+          <IdentityModal showDialog={dialog} onCloseDialog={() => setDialog(false)} />
+        </React.Suspense>
       </div>
     </IdentityContextProvider>
   )

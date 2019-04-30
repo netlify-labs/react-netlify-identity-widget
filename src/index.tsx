@@ -31,7 +31,7 @@ export const IdentityContextProvider = _IdentityContextProvider
 export const useNetlifyIdentity = _useNetlifyIdentity
 export const IdentityContext = _IdentityContext
 export const useIdentityContext = _useIdentityContext
-export default function IdentityModal({ showDialog, onCloseDialog }: ModalProps) {
+export function IdentityModal({ showDialog, onCloseDialog }: ModalProps) {
   const { settings } = useIdentityContext()
   const [setting, setSetting] = React.useState<Settings | null>(null)
   React.useEffect(() => {
@@ -63,3 +63,4 @@ export default function IdentityModal({ showDialog, onCloseDialog }: ModalProps)
     </SettingContext.Provider>
   )
 }
+export default IdentityModal
