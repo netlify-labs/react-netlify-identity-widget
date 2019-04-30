@@ -5,7 +5,7 @@ import {
 } from "@reach/dialog"
 import VisuallyHidden from "@reach/visually-hidden"
 
-const Widget = React.lazy(() => import("./app"))
+import { Widget } from "./app"
 
 import { FormStateContextProvider, SettingContext } from "./context"
 import { ErrorBoundary } from "./errorBoundary"
@@ -31,7 +31,7 @@ export const IdentityContextProvider = _IdentityContextProvider
 export const useNetlifyIdentity = _useNetlifyIdentity
 export const IdentityContext = _IdentityContext
 export const useIdentityContext = _useIdentityContext
-export function IdentityModal({ showDialog, onCloseDialog }: ModalProps) {
+export default function IdentityModal({ showDialog, onCloseDialog }: ModalProps) {
   const { settings } = useIdentityContext()
   const [setting, setSetting] = React.useState<Settings | null>(null)
   React.useEffect(() => {

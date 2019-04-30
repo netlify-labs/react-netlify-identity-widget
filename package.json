@@ -2,8 +2,8 @@
   "name": "react-netlify-identity-widget",
   "version": "0.0.24",
   "main": "dist/index.js",
-  "module": "dist/reactNetlifyIdentityWidget.es.production/index.js",
-  "typings": "dist/reactNetlifyIdentityWidget.es.production/src/index.d.ts",
+  "module": "dist/react-netlify-identity-widget.es.production.js",
+  "typings": "dist/index.d.ts",
   "files": [
     "dist",
     "styles.css"
@@ -29,7 +29,7 @@
     "patch-package": "^6.1.2",
     "postinstall-postinstall": "^2.0.0",
     "semantic-release": "^15.13.3",
-    "tsdx": "^0.4.1",
+    "tsdx": "^0.5.1",
     "typescript": "^3.4.4"
   },
   "peerDependencies": {

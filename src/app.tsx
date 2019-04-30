@@ -33,12 +33,12 @@ function LoggedInScreen() {
   return <Logout />
 }
 
-function Gate({  }: { onCloseDialog: Function }) {
+function Gate({ }: { onCloseDialog: Function }) {
   const identity = useIdentityContext()
   const isLoggedIn = Boolean(identity && identity.user)
   return isLoggedIn ? <LoggedInScreen /> : <LoggedOutScreen />
 }
 
-export default function Widget({ onCloseDialog }: { onCloseDialog: Function }) {
+export function Widget({ onCloseDialog }: { onCloseDialog: Function }) {
   return <Gate onCloseDialog={onCloseDialog} />
 }
