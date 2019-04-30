@@ -24,6 +24,7 @@ import "./App.css"
 import { useNetlifyIdentity, IdentityContextProvider } from "react-netlify-identity-widget"
 import "react-netlify-identity-widget/styles.css"
 
+// code split the modal til you need it!
 const IdentityModal = React.lazy(() => import("react-netlify-identity-widget"))
 
 function App() {
