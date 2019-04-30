@@ -3,6 +3,8 @@ import "./App.css"
 import { IdentityModal, useNetlifyIdentity, IdentityContextProvider } from "react-netlify-identity-widget"
 import "react-netlify-identity-widget/styles.css"
 
+
+
 function App() {
   const [dialog, setDialog] = React.useState(false)
   const identity = useNetlifyIdentity("https://react-netlify-identity-widget.netlify.com")
@@ -24,21 +26,20 @@ function App() {
               >
                 LOG OUT
               </button>
-              <IdentityModal showDialog={dialog} onCloseDialog={() => setDialog(false)} />
             </>
           ) : (
-            <>
-              <h1> hello! try logging in! </h1>
-              <button
-                className="btn"
-                style={{ maxWidth: 400, background: "darkgreen" }}
-                onClick={() => setDialog(true)}
-              >
-                LOG IN
+              <>
+                <h1> hello! try logging in! </h1>
+                <button
+                  className="btn"
+                  style={{ maxWidth: 400, background: "darkgreen" }}
+                  onClick={() => setDialog(true)}
+                >
+                  LOG IN
               </button>
-              <IdentityModal showDialog={dialog} onCloseDialog={() => setDialog(false)} />
-            </>
-          )}
+              </>
+            )}
+          <IdentityModal showDialog={dialog} onCloseDialog={() => setDialog(false)} />
           <h3>
             Or{" "}
             <a
