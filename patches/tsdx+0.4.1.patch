@@ -1,0 +1,89 @@
+diff --git a/node_modules/tsdx/dist/.progress-estimator/5e1a1bc72a1c85f144986cb7aa3d91e6fd42e1c4 b/node_modules/tsdx/dist/.progress-estimator/5e1a1bc72a1c85f144986cb7aa3d91e6fd42e1c4
+index 3bcf40b..b0e3524 100644
+--- a/node_modules/tsdx/dist/.progress-estimator/5e1a1bc72a1c85f144986cb7aa3d91e6fd42e1c4
++++ b/node_modules/tsdx/dist/.progress-estimator/5e1a1bc72a1c85f144986cb7aa3d91e6fd42e1c4
+@@ -1,5 +1,12 @@
+ 1063
+ 1221
++15096
++11034
++5894
++5488
++9926
++3208
++8393
++19165
+ 1229
+ 1176
+\ No newline at end of file
+-1250
+\ No newline at end of file
+diff --git a/node_modules/tsdx/dist/.progress-estimator/9a3492e73be0eb3875889eb84075f018f90b4f72 b/node_modules/tsdx/dist/.progress-estimator/9a3492e73be0eb3875889eb84075f018f90b4f72
+index c912aff..2f21f21 100644
+--- a/node_modules/tsdx/dist/.progress-estimator/9a3492e73be0eb3875889eb84075f018f90b4f72
++++ b/node_modules/tsdx/dist/.progress-estimator/9a3492e73be0eb3875889eb84075f018f90b4f72
+@@ -1,5 +1,12 @@
+ 1973
+ 2032
++3131
++3763
++3766
++3102
++3044
++3216
++3116
++3078
+ 2737
+ 2627
+\ No newline at end of file
+-3019
+\ No newline at end of file
+diff --git a/node_modules/tsdx/dist/createRollupConfig.js b/node_modules/tsdx/dist/createRollupConfig.js
+index 65b8da6..4931aad 100644
+--- a/node_modules/tsdx/dist/createRollupConfig.js
++++ b/node_modules/tsdx/dist/createRollupConfig.js
+@@ -74,10 +74,10 @@ function createRollupConfig(format, env, opts) {
+                 ].filter(Boolean),
+             }),
+             format === 'umd' &&
+-                rollup_plugin_commonjs_1.default({
+-                    // use a regex to make sure to include eventual hoisted packages
+-                    include: /\/node_modules\//,
+-                }),
++            rollup_plugin_commonjs_1.default({
++                // use a regex to make sure to include eventual hoisted packages
++                include: /\/node_modules\//,
++            }),
+             rollup_plugin_json_1.default(),
+             rollup_plugin_typescript2_1.default({
+                 typescript: require('typescript'),
+@@ -104,17 +104,18 @@ function createRollupConfig(format, env, opts) {
+                 printInfo: false,
+             }),
+             env === 'production' &&
+-                rollup_plugin_terser_1.terser({
+-                    sourcemap: true,
+-                    output: { comments: false },
+-                    compress: {
+-                        keep_infinity: true,
+-                        pure_getters: true,
+-                    },
+-                    ecma: 5,
+-                    toplevel: format === 'es' || format === 'cjs',
+-                    warnings: true,
+-                }),
++            rollup_plugin_terser_1.terser({
++                sourcemap: true,
++                output: { comments: false },
++                // compress: {
++                //     keep_infinity: true,
++                //     pure_getters: true,
++                // },
++                compress: false,
++                ecma: 5,
++                toplevel: format === 'es' || format === 'cjs',
++                warnings: true,
++            }),
+             rollup_plugin_preserve_shebang_1.default({
+                 shebang,
+             }),
