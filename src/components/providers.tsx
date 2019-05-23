@@ -2,16 +2,6 @@ import React from "react"
 import { useIdentityContext, SettingContext } from "../context"
 import { Settings } from "react-netlify-identity"
 
-const isLocalhost =
-  window !== undefined &&
-  Boolean(
-    window.location.hostname === "localhost" ||
-      // [::1] is the IPv6 localhost address.
-      window.location.hostname === "[::1]" ||
-      // 127.0.0.1/8 is considered localhost for IPv4.
-      window.location.hostname.match(/^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/)
-  )
-
 export function Providers() {
   const setting = React.useContext(SettingContext)
   const hasProviders =
@@ -19,6 +9,16 @@ export function Providers() {
     setting.external &&
     Object.entries(setting.external).some(([k, v]) => ["github", "gitlab", "bitbucket", "google"].includes(k) && v)
   if (!hasProviders) return null
+  let isLocalhost = false
+  if (typeof window !== "undefined") {
+    isLocalhost = Boolean(
+      window.location.hostname === "localhost" ||
+        // [::1] is the IPv6 localhost address.
+        window.location.hostname === "[::1]" ||
+        // 127.0.0.1/8 is considered localhost for IPv4.
+        window.location.hostname.match(/^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/)
+    )
+  }
   return (
     <div className="providersGroup">
       {isLocalhost && (
