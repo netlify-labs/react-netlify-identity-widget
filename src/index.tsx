@@ -11,7 +11,7 @@ import { ErrorBoundary } from "./errorBoundary"
 
 import {
   IdentityContextProvider as _IdentityContextProvider,
-  useIdentityCtx as _useIdentityCtx
+  useIdentityContext as _useIdentityContext
 } from "react-netlify-identity"
 export { User, Settings, ReactNetlifyIdentityAPI, useNetlifyIdentity } from "react-netlify-identity"
 
@@ -25,7 +25,7 @@ type ModalProps = {
 }
 
 export const IdentityContextProvider = _IdentityContextProvider
-export const useIdentityContext = _useIdentityCtx
+export const useIdentityContext = _useIdentityContext
 export function IdentityModal({ showDialog, onCloseDialog }: ModalProps) {
   return (
     <Dialog

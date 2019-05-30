@@ -288,7 +288,7 @@
   height: auto;
   margin: 14px 0 0;
   padding: 6px;
-  outline: 0;
+  /* outline: 0; */
   cursor: pointer;
   border: 2px solid rgb(14, 30, 37);
   border-radius: 4px;

@@ -21,7 +21,7 @@ and the styles are optional but provided. here's how to use `IdentityModal, useN
 ```tsx
 import React from "react"
 import "./App.css"
-import { useIdentityCtx, IdentityContextProvider } from "react-netlify-identity-widget"
+import { useIdentityContext, IdentityContextProvider } from "react-netlify-identity-widget"
 import "react-netlify-identity-widget/styles.css"
 
 function App() {
@@ -38,7 +38,7 @@ export default App
 const IdentityModal = React.lazy(() => import("react-netlify-identity-widget"))
 
 function AuthStatusView() {
-  const identity = useIdentityCtx()
+  const identity = useIdentityContext()
   const [dialog, setDialog] = React.useState(false)
   const name =
     (identity && identity.user && identity.user.user_metadata && identity.user.user_metadata.name) || "NoName"

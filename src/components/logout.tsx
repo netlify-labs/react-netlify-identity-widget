@@ -1,9 +1,9 @@
 import React from "react"
-import { useIdentityCtx } from "react-netlify-identity"
+import { useIdentityContext } from "react-netlify-identity"
 import useLoading from "../useLoading"
 
 export function Logout() {
-  const identity = useIdentityCtx()
+  const identity = useIdentityContext()
   const name =
     (identity && identity.user && identity.user.user_metadata && identity.user.user_metadata.full_name) || "NoName"
 

@@ -1,10 +1,10 @@
 import React from "react"
-import { useIdentityCtx } from "react-netlify-identity"
+import { useIdentityContext } from "react-netlify-identity"
 import useLoading from "../useLoading"
 import VisuallyHidden from "@reach/visually-hidden"
 
 export function Signup() {
-  const { signupUser } = useIdentityCtx()
+  const { signupUser } = useIdentityContext()
   const formRef = React.useRef<HTMLFormElement>(null)
   const [msg, setMsg] = React.useState("")
   const [isLoading, load] = useLoading()

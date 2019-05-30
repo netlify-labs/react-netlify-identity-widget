@@ -1,8 +1,8 @@
 import React from "react"
-import { Settings, useIdentityCtx } from "react-netlify-identity"
+import { Settings, useIdentityContext } from "react-netlify-identity"
 
 export function Providers() {
-  const { settings } = useIdentityCtx()
+  const { settings } = useIdentityContext()
   const hasProviders = Object.entries(settings.external).some(
     ([k, v]) => ["github", "gitlab", "bitbucket", "google"].includes(k) && v
   )
@@ -37,7 +37,7 @@ interface Dict<T> {
 function ProviderButton({ settings, provider }: { settings: Settings; provider: string }) {
   const ext = settings.external as Dict<{}>
   if (!ext[provider.toLowerCase()]) return null
-  const { loginProvider } = useIdentityCtx()
+  const { loginProvider } = useIdentityContext()
   const click = () => loginProvider(provider.toLowerCase() as "github" | "gitlab" | "bitbucket" | "google")
   return (
     <button onClick={click} className={`provider${provider} btn btnProvider`}>
