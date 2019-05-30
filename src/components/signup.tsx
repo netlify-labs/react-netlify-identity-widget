@@ -1,10 +1,10 @@
 import React from "react"
-import { useIdentityContext } from "../context"
+import { useIdentityCtx } from "react-netlify-identity"
 import useLoading from "../useLoading"
 import VisuallyHidden from "@reach/visually-hidden"
 
 export function Signup() {
-  const { signupUser } = useIdentityContext()
+  const { signupUser } = useIdentityCtx()
   const formRef = React.useRef<HTMLFormElement>(null)
   const [msg, setMsg] = React.useState("")
   const [isLoading, load] = useLoading()
@@ -15,11 +15,11 @@ export function Signup() {
     const password = formRef.current.password.value
     const data = { signupSource: "react-netlify-identity-widget", full_name }
     load(signupUser(email, password, data))
-      .then(user => {
+      .then((user) => {
         console.log("Success! Signed up", user)
         // navigate("/dashboard")
       })
-      .catch(err => void console.error(err) || setMsg("Error: " + err.message))
+      .catch((err) => void console.error(err) || setMsg("Error: " + err.message))
   }
   return (
     <form

@@ -29,7 +29,7 @@ const IdentityModal = React.lazy(() => import("react-netlify-identity-widget"))
 
 function App() {
   const [dialog, setDialog] = React.useState(false)
-  const identity = useNetlifyIdentity("https://netlify-gotrue-in-react.netlify.com")
+  const url = process.env.REACT_APP_NETLIFY_URL // supply the url of your Netlify site instance. VERY IMPORTANT
   const name =
     (identity && identity.user && identity.user.user_metadata && identity.user.user_metadata.name) || "NoName"
   return (

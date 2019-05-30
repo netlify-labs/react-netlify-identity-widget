@@ -1,13 +1,11 @@
 import React from "react"
-import { useIdentityContext, SettingContext } from "../context"
-import { Settings } from "react-netlify-identity"
+import { Settings, useIdentityCtx } from "react-netlify-identity"
 
 export function Providers() {
-  const setting = React.useContext(SettingContext)
-  const hasProviders =
-    setting &&
-    setting.external &&
-    Object.entries(setting.external).some(([k, v]) => ["github", "gitlab", "bitbucket", "google"].includes(k) && v)
+  const { settings } = useIdentityCtx()
+  const hasProviders = Object.entries(settings.external).some(
+    ([k, v]) => ["github", "gitlab", "bitbucket", "google"].includes(k) && v
+  )
   if (!hasProviders) return null
   let isLocalhost = false
   if (typeof window !== "undefined") {
@@ -25,10 +23,10 @@ export function Providers() {
         <pre>⚠️Testing providers on localhost won't work because OAuth redirects to your production site</pre>
       )}
       <hr className="hr" />
-      <ProviderButton setting={setting} provider="Google" />
-      <ProviderButton setting={setting} provider="GitHub" />
-      <ProviderButton setting={setting} provider="GitLab" />
-      <ProviderButton setting={setting} provider="Bitbucket" />
+      <ProviderButton settings={settings} provider="Google" />
+      <ProviderButton settings={settings} provider="GitHub" />
+      <ProviderButton settings={settings} provider="GitLab" />
+      <ProviderButton settings={settings} provider="Bitbucket" />
     </div>
   )
 }
@@ -36,11 +34,10 @@ export function Providers() {
 interface Dict<T> {
   [id: string]: T
 }
-function ProviderButton({ setting, provider }: { setting: Settings | null; provider: string }) {
-  if (!setting) return null
-  const ext = setting.external as Dict<{}>
+function ProviderButton({ settings, provider }: { settings: Settings; provider: string }) {
+  const ext = settings.external as Dict<{}>
   if (!ext[provider.toLowerCase()]) return null
-  const { loginProvider } = useIdentityContext()
+  const { loginProvider } = useIdentityCtx()
   const click = () => loginProvider(provider.toLowerCase() as "github" | "gitlab" | "bitbucket" | "google")
   return (
     <button onClick={click} className={`provider${provider} btn btnProvider`}>

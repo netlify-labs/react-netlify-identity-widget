@@ -1,10 +1,10 @@
 import React from "react"
-import { useIdentityContext } from "../context"
+import { useIdentityCtx } from "react-netlify-identity"
 import useLoading from "../useLoading"
 import VisuallyHidden from "@reach/visually-hidden"
 
 export function Login() {
-  const { loginUser } = useIdentityContext()
+  const { loginUser } = useIdentityCtx()
   const formRef = React.useRef<HTMLFormElement>(null)
   const [msg, setMsg] = React.useState("")
   const [isLoading, load] = useLoading()
@@ -30,11 +30,11 @@ export function Login() {
         const email = target.email.value
         const password = target.password.value
         load(loginUser(email, password, true))
-          .then(user => {
+          .then((user) => {
             console.log("Success! Logged in", user)
             // navigate("/dashboard")
           })
-          .catch(err => void console.error(err) || setMsg("Error: " + err.message))
+          .catch((err) => void console.error(err) || setMsg("Error: " + err.message))
       }}
     >
       <div className="formGroup" key="email">

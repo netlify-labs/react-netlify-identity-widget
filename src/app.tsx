@@ -2,7 +2,7 @@ import React from "react"
 import { Login } from "./components/login"
 import { Logout } from "./components/logout"
 import { Signup } from "./components/signup"
-import { useIdentityContext } from "./context"
+import { useIdentityCtx } from "react-netlify-identity"
 import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@reach/tabs"
 
 import { Providers } from "./components/providers"
@@ -33,8 +33,8 @@ function LoggedInScreen() {
   return <Logout />
 }
 
-function Gate({ }: { onCloseDialog: Function }) {
-  const identity = useIdentityContext()
+function Gate({  }: { onCloseDialog: Function }) {
+  const identity = useIdentityCtx()
   const isLoggedIn = Boolean(identity && identity.user)
   return isLoggedIn ? <LoggedInScreen /> : <LoggedOutScreen />
 }
