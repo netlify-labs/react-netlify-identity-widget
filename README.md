@@ -21,43 +21,50 @@ and the styles are optional but provided. here's how to use `IdentityModal, useN
 ```tsx
 import React from "react"
 import "./App.css"
-import { useNetlifyIdentity, IdentityContextProvider } from "react-netlify-identity-widget"
+import { useIdentityCtx, IdentityContextProvider } from "react-netlify-identity-widget"
 import "react-netlify-identity-widget/styles.css"
 
-// code split the modal til you need it!
-const IdentityModal = React.lazy(() => import("react-netlify-identity-widget"))
-
 function App() {
-  const [dialog, setDialog] = React.useState(false)
   const url = process.env.REACT_APP_NETLIFY_URL // supply the url of your Netlify site instance. VERY IMPORTANT
-  const name =
-    (identity && identity.user && identity.user.user_metadata && identity.user.user_metadata.name) || "NoName"
   return (
     <IdentityContextProvider value={identity}>
-      <div className="App">
-        {identity && identity.isLoggedIn ? (
-          <header className="App-header">
-            <h1> hello {name}!</h1>
-            <button className="btn" onClick={() => setDialog(true)}>
-              LOG OUT
-            </button>
-          </header>
-        ) : (
-          <header className="App-header">
-            <h1> hello! try logging in! </h1>
-            <button className="btn" onClick={() => setDialog(true)}>
-              LOG IN
-            </button>
-          </header>
-        )}
-        <React.Suspense fallback="loading...">
-          <IdentityModal showDialog={dialog} onCloseDialog={() => setDialog(false)} />
-        </React.Suspense>
-      </div>
+      <AuthStatusView />
     </IdentityContextProvider>
   )
 }
 export default App
+
+// code split the modal til you need it!
+const IdentityModal = React.lazy(() => import("react-netlify-identity-widget"))
+
+function AuthStatusView() {
+  const identity = useIdentityCtx()
+  const [dialog, setDialog] = React.useState(false)
+  const name =
+    (identity && identity.user && identity.user.user_metadata && identity.user.user_metadata.name) || "NoName"
+  return (
+    <div className="App">
+      {identity && identity.isLoggedIn ? (
+        <header className="App-header">
+          <h1> hello {name}!</h1>
+          <button className="btn" onClick={() => setDialog(true)}>
+            LOG OUT
+          </button>
+        </header>
+      ) : (
+        <header className="App-header">
+          <h1> hello! try logging in! </h1>
+          <button className="btn" onClick={() => setDialog(true)}>
+            LOG IN
+          </button>
+        </header>
+      )}
+      <React.Suspense fallback="loading...">
+        <IdentityModal showDialog={dialog} onCloseDialog={() => setDialog(false)} />
+      </React.Suspense>
+    </div>
+  )
+}
 ```
 
 # local dev
