@@ -27,7 +27,7 @@ import "react-netlify-identity-widget/styles.css"
 function App() {
   const url = process.env.REACT_APP_NETLIFY_URL // supply the url of your Netlify site instance. VERY IMPORTANT
   return (
-    <IdentityContextProvider value={identity}>
+    <IdentityContextProvider value={url}>
       <AuthStatusView />
     </IdentityContextProvider>
   )
