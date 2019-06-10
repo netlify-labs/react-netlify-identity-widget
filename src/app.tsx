@@ -10,9 +10,9 @@ function LoggedOutScreen() {
   return (
     <div>
       <Tabs defaultIndex={0}>
-        <TabList>
-          <Tab>Login</Tab>
-          <Tab>Sign Up</Tab>
+        <TabList className="header">
+          <Tab className="btn btnHeader">Login</Tab>
+          <Tab className="btn btnHeader">Sign Up</Tab>
         </TabList>
 
         <TabPanels>
