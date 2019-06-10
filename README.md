@@ -21,7 +21,7 @@ and the styles are optional but provided. here's how to use `IdentityModal, useI
 ```tsx
 import React from "react"
 import "./App.css"
-import { useIdentityContext, IdentityContextProvider } from "react-netlify-identity-widget"
+import IdentityModal, { useIdentityContext, IdentityContextProvider } from "react-netlify-identity-widget"
 import "react-netlify-identity-widget/styles.css"
 
 function App() {
@@ -34,31 +34,36 @@ function App() {
 }
 export default App
 
-// code split the modal til you need it!
-const IdentityModal = React.lazy(() => import("react-netlify-identity-widget"))
-
 function AuthStatusView() {
   const identity = useIdentityContext()
   const [dialog, setDialog] = React.useState(false)
   const name =
     (identity && identity.user && identity.user.user_metadata && identity.user.user_metadata.name) || "NoName"
+  const isLoggedIn = identity && identity.isLoggedIn
+  return (
+    <div>
+      <div>
+        <button className="btn" onClick={() => setDialog(true)}>
+          {isLoggedIn ? `Hello ${name}, Log out here!` : "Log In"}
+        </button>
+      </div>
+      <IdentityModal showDialog={dialog} onCloseDialog={() => setDialog(false)} />
+    </div>
+  )
+}
+```
+
+You may also code split the Modal if you wish with `React.lazy` and `React.Suspense`:
+
+```js
+// code split the modal til you need it!
+const IdentityModal = React.lazy(() => import("react-netlify-identity-widget"))
+
+function AuthStatusView() {
+  // ...
   return (
     <div className="App">
-      {identity && identity.isLoggedIn ? (
-        <header className="App-header">
-          <h1> hello {name}!</h1>
-          <button className="btn" onClick={() => setDialog(true)}>
-            LOG OUT
-          </button>
-        </header>
-      ) : (
-        <header className="App-header">
-          <h1> hello! try logging in! </h1>
-          <button className="btn" onClick={() => setDialog(true)}>
-            LOG IN
-          </button>
-        </header>
-      )}
+      {/** ... */}
       <React.Suspense fallback="loading...">
         <IdentityModal showDialog={dialog} onCloseDialog={() => setDialog(false)} />
       </React.Suspense>
@@ -67,7 +72,11 @@ function AuthStatusView() {
 }
 ```
 
-# local dev
+## Gatsby plugin
+
+You may get a little help configuring RNIW for usage with Gatsby by using https://github.com/sw-yx/gatsby-plugin-netlify-identity. Read its README for more info.
+
+## local dev
 
 ```bash
 yarn
