@@ -16,7 +16,7 @@ we require some peer dependencies:
 yarn add react-netlify-identity-widget @reach/dialog @reach/tabs @reach/visually-hidden
 ```
 
-and the styles are optional but provided. here's how to use `IdentityModal, useNetlifyIdentity, IdentityContextProvider`:
+and the styles are optional but provided. here's how to use `IdentityModal, useIdentityContext, IdentityContextProvider`:
 
 ```tsx
 import React from "react"
@@ -27,7 +27,7 @@ import "react-netlify-identity-widget/styles.css"
 function App() {
   const url = process.env.REACT_APP_NETLIFY_URL // supply the url of your Netlify site instance. VERY IMPORTANT
   return (
-    <IdentityContextProvider value={identity}>
+    <IdentityContextProvider url={url}>
       <AuthStatusView />
     </IdentityContextProvider>
   )
