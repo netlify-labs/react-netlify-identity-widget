@@ -25,7 +25,7 @@ import { useIdentityContext, IdentityContextProvider } from "react-netlify-ident
 import "react-netlify-identity-widget/styles.css"
 
 function App() {
-  const url = process.env.REACT_APP_NETLIFY_URL // supply the url of your Netlify site instance. VERY IMPORTANT
+  const url = "https://your-identity-instance.netlify.com/" // supply the url of your Netlify site instance. VERY IMPORTANT. no point putting in env var since this is public anyway
   return (
     <IdentityContextProvider url={url}>
       <AuthStatusView />
