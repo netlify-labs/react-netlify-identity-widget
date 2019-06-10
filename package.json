@@ -37,7 +37,7 @@
     "react-dom": "^15.0.0 || ^16.0.0"
   },
   "dependencies": {
-    "react-netlify-identity": "^0.1.5"
+    "react-netlify-identity": "^0.1.7"
   },
   "config": {
     "commitizen": {
