@@ -4,7 +4,8 @@ import { useIdentityContext, IdentityContextProvider } from "react-netlify-ident
 import "react-netlify-identity-widget/styles.css"
 
 function App() {
-  const url = "https://react-netlify-identity-widget.netlify.com"
+  const url = process.env.REACT_APP_NETLIFY_IDENTITY_URL // should look something like "https://foo.netlify.com"
+  if (!url) throw new Error('process.env.REACT_APP_NETLIFY_IDENTITY_URL is blank, which means you probably forgot to set it in your Netlify environment variables')
   return (
     <IdentityContextProvider url={url}>
       <AuthStatusView />
