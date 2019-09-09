@@ -1,12 +1,17 @@
-import React from "react"
-import { Login } from "./components/login"
-import { Logout } from "./components/logout"
-import { Signup } from "./components/signup"
-import { useIdentityContext } from "react-netlify-identity"
-import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@reach/tabs"
+import React from 'react'
+import { Login } from './components/login'
+import { Logout } from './components/logout'
+import { Signup } from './components/signup'
+import { User, useIdentityContext } from 'react-netlify-identity'
+import { Tabs, TabList, Tab, TabPanels, TabPanel } from '@reach/tabs'
 
-import { Providers } from "./components/providers"
-function LoggedOutScreen() {
+import { Providers } from './components/providers'
+export type AuthProps = {
+  onLogin?: (user?: User) => void
+  onSignup?: (user?: User) => void
+  onLogout?: () => void
+}
+function LoggedOutScreen(props: AuthProps) {
   return (
     <div>
       <Tabs defaultIndex={0}>
@@ -17,10 +22,10 @@ function LoggedOutScreen() {
 
         <TabPanels>
           <TabPanel>
-            <Login />
+            <Login onLogin={props.onLogin} />
           </TabPanel>
           <TabPanel>
-            <Signup />
+            <Signup onSignup={props.onSignup} />
           </TabPanel>
         </TabPanels>
       </Tabs>
@@ -29,16 +34,12 @@ function LoggedOutScreen() {
   )
 }
 
-function LoggedInScreen() {
-  return <Logout />
+function LoggedInScreen(props: AuthProps) {
+  return <Logout onLogout={props.onLogout} />
 }
 
-function Gate({  }: { onCloseDialog: Function }) {
+export function Widget(props: AuthProps) {
   const identity = useIdentityContext()
   const isLoggedIn = Boolean(identity && identity.user)
-  return isLoggedIn ? <LoggedInScreen /> : <LoggedOutScreen />
-}
-
-export function Widget({ onCloseDialog }: { onCloseDialog: Function }) {
-  return <Gate onCloseDialog={onCloseDialog} />
+  return isLoggedIn ? <LoggedInScreen {...props} /> : <LoggedOutScreen {...props} />
 }

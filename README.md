@@ -8,11 +8,7 @@ the demo is hosted at: https://react-netlify-identity-widget.netlify.com (you ca
 
 and the source is in `/examples`.
 
-## Blogposts
-
-- [Add Netlify Identity Authentication to any React App in 5 minutes with React Context, Hooks and Suspense](https://dev.to/swyx/add-netlify-identity-authentication-to-any-react-app-in-5-minutes-with-react-context-hooks-and-suspense-5gci)
-
-## usage
+## Usage
 
 we require some peer dependencies:
 
@@ -23,13 +19,13 @@ yarn add react-netlify-identity-widget @reach/dialog @reach/tabs @reach/visually
 and the styles are optional but provided. here's how to use `IdentityModal, useIdentityContext, IdentityContextProvider`:
 
 ```tsx
-import React from "react"
-import "./App.css"
-import IdentityModal, { useIdentityContext, IdentityContextProvider } from "react-netlify-identity-widget"
-import "react-netlify-identity-widget/styles.css"
+import React from 'react'
+import './App.css'
+import IdentityModal, { useIdentityContext, IdentityContextProvider } from 'react-netlify-identity-widget'
+import 'react-netlify-identity-widget/styles.css'
 
 function App() {
-  const url = "https://your-identity-instance.netlify.com/" // supply the url of your Netlify site instance. VERY IMPORTANT. no point putting in env var since this is public anyway
+  const url = 'https://your-identity-instance.netlify.com/' // supply the url of your Netlify site instance. VERY IMPORTANT. no point putting in env var since this is public anyway
   return (
     <IdentityContextProvider url={url}>
       <AuthStatusView />
@@ -42,16 +38,22 @@ function AuthStatusView() {
   const identity = useIdentityContext()
   const [dialog, setDialog] = React.useState(false)
   const name =
-    (identity && identity.user && identity.user.user_metadata && identity.user.user_metadata.name) || "NoName"
+    (identity && identity.user && identity.user.user_metadata && identity.user.user_metadata.name) || 'NoName'
   const isLoggedIn = identity && identity.isLoggedIn
   return (
     <div>
       <div>
         <button className="btn" onClick={() => setDialog(true)}>
-          {isLoggedIn ? `Hello ${name}, Log out here!` : "Log In"}
+          {isLoggedIn ? `Hello ${name}, Log out here!` : 'Log In'}
         </button>
       </div>
-      <IdentityModal showDialog={dialog} onCloseDialog={() => setDialog(false)} />
+      <IdentityModal
+        showDialog={dialog}
+        onCloseDialog={() => setDialog(false)}
+        onLogin={(user) => console.log('hello ', user.user_metadata)}
+        onSignup={(user) => console.log('welcome ', user.user_metadata)}
+        onLogout={() => console.log('bye ', name)}
+      />
     </div>
   )
 }
@@ -61,7 +63,7 @@ You may also code split the Modal if you wish with `React.lazy` and `React.Suspe
 
 ```js
 // code split the modal til you need it!
-const IdentityModal = React.lazy(() => import("react-netlify-identity-widget"))
+const IdentityModal = React.lazy(() => import('react-netlify-identity-widget'))
 
 function AuthStatusView() {
   // ...
@@ -75,6 +77,10 @@ function AuthStatusView() {
   )
 }
 ```
+
+## Blogposts
+
+- [Add Netlify Identity Authentication to any React App in 5 minutes with React Context, Hooks and Suspense](https://dev.to/swyx/add-netlify-identity-authentication-to-any-react-app-in-5-minutes-with-react-context-hooks-and-suspense-5gci)
 
 ## Gatsby plugin
 

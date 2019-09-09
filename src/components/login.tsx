@@ -1,25 +1,17 @@
-import React from "react"
-import { useIdentityContext } from "react-netlify-identity"
-import useLoading from "../useLoading"
-import VisuallyHidden from "@reach/visually-hidden"
+import React from 'react'
+import { useIdentityContext, User } from 'react-netlify-identity'
+import useLoading from '../useLoading'
+import VisuallyHidden from '@reach/visually-hidden'
 
-export function Login() {
+type LoginProps = {
+  onLogin?: (user?: User) => void
+}
+
+export function Login({ onLogin }: LoginProps) {
   const { loginUser } = useIdentityContext()
   const formRef = React.useRef<HTMLFormElement>(null)
-  const [msg, setMsg] = React.useState("")
+  const [msg, setMsg] = React.useState('')
   const [isLoading, load] = useLoading()
-  // const signup = () => {
-  //   if (!formRef.current) return
-  //   const email = formRef.current.email.value
-  //   const password = formRef.current.password.value
-  //   const data = { signupSource: "react-netlify-identity-widget" }
-  //   load(signupUser(email, password, data))
-  //     .then(user => {
-  //       console.log("Success! Signed up", user)
-  //       // navigate("/dashboard")
-  //     })
-  //     .catch(err => void console.error(err) || setMsg("Error: " + err.message))
-  // }
   return (
     <form
       ref={formRef}
@@ -31,10 +23,10 @@ export function Login() {
         const password = target.password.value
         load(loginUser(email, password, true))
           .then((user) => {
-            console.log("Success! Logged in", user)
-            // navigate("/dashboard")
+            if (process.env.NODE_ENV !== 'production') console.log('Success! Logged in', user)
+            if (onLogin) onLogin(user)
           })
-          .catch((err) => void console.error(err) || setMsg("Error: " + err.message))
+          .catch((err) => void console.error(err) || setMsg('Error: ' + err.message))
       }}
     >
       <div className="formGroup" key="email">
@@ -60,10 +52,10 @@ export function Login() {
       </div>
 
       <div>
-        <button type="submit" className={isLoading ? "btn saving" : "btn"}>
+        <button type="submit" className={isLoading ? 'btn saving' : 'btn'}>
           Log in
         </button>
-        {msg && <pre style={{ background: "salmon", padding: 10 }}>{msg}</pre>}
+        {msg && <pre style={{ background: 'salmon', padding: 10 }}>{msg}</pre>}
       </div>
       <button type="button" className="btnLink forgotPasswordLink">
         Forgot password?

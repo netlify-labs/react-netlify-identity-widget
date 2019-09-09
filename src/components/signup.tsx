@@ -1,25 +1,28 @@
-import React from "react"
-import { useIdentityContext } from "react-netlify-identity"
-import useLoading from "../useLoading"
-import VisuallyHidden from "@reach/visually-hidden"
+import React from 'react'
+import { User, useIdentityContext } from 'react-netlify-identity'
+import useLoading from '../useLoading'
+import VisuallyHidden from '@reach/visually-hidden'
 
-export function Signup() {
+type SignupProps = {
+  onSignup?: (user?: User) => void
+}
+export function Signup({ onSignup }: SignupProps) {
   const { signupUser } = useIdentityContext()
   const formRef = React.useRef<HTMLFormElement>(null)
-  const [msg, setMsg] = React.useState("")
+  const [msg, setMsg] = React.useState('')
   const [isLoading, load] = useLoading()
   const signup = () => {
     if (!formRef.current) return
     const full_name = formRef.current.username.value
     const email = formRef.current.email.value
     const password = formRef.current.password.value
-    const data = { signupSource: "react-netlify-identity-widget", full_name }
+    const data = { signupSource: 'react-netlify-identity-widget', full_name }
     load(signupUser(email, password, data))
       .then((user) => {
-        console.log("Success! Signed up", user)
-        // navigate("/dashboard")
+        if (process.env.NODE_ENV !== 'production') console.log('Success! Signed up', user)
+        if (onSignup) onSignup(user)
       })
-      .catch((err) => void console.error(err) || setMsg("Error: " + err.message))
+      .catch((err) => void console.error(err) || setMsg('Error: ' + err.message))
   }
   return (
     <form
@@ -67,10 +70,10 @@ export function Signup() {
         </label>
       </div>
       <div>
-        <button type="submit" className={isLoading ? "btn saving" : "btn"}>
+        <button type="submit" className={isLoading ? 'btn saving' : 'btn'}>
           Sign Up
         </button>
-        {msg && <pre style={{ background: "salmon", padding: 10 }}>{msg}</pre>}
+        {msg && <pre style={{ background: 'salmon', padding: 10 }}>{msg}</pre>}
       </div>
     </form>
   )
