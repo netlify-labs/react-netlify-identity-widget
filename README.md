@@ -59,24 +59,7 @@ function AuthStatusView() {
 }
 ```
 
-You may also code split the Modal if you wish with `React.lazy` and `React.Suspense`:
-
-```js
-// code split the modal til you need it!
-const IdentityModal = React.lazy(() => import('react-netlify-identity-widget'))
-
-function AuthStatusView() {
-  // ...
-  return (
-    <div className="App">
-      {/** ... */}
-      <React.Suspense fallback="loading...">
-        <IdentityModal showDialog={dialog} onCloseDialog={() => setDialog(false)} />
-      </React.Suspense>
-    </div>
-  )
-}
-```
+You may also code split the Modal if you wish with `React.lazy` and `React.Suspense`.
 
 ## Blogposts
 

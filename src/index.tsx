@@ -1,13 +1,7 @@
 import React from 'react'
-import {
-  Dialog,
-  // DialogOverlay, DialogContent
-} from '@reach/dialog'
+import { Dialog } from '@reach/dialog'
 import VisuallyHidden from '@reach/visually-hidden'
-
 import { Widget, AuthProps } from './app'
-
-import { ErrorBoundary } from './errorBoundary'
 
 import {
   IdentityContextProvider as _IdentityContextProvider,
@@ -21,7 +15,7 @@ type ModalProps = {
   /** pass a boolean to be true or false */
   showDialog: boolean
   /** modal will call this function to set the state of showDialog to false */
-  onCloseDialog: () => void
+  onCloseDialog?: () => void
 } & AuthProps
 
 export const IdentityContextProvider = _IdentityContextProvider
@@ -41,11 +35,7 @@ export function IdentityModal({ showDialog, onCloseDialog, ...authprops }: Modal
       <button className="btn btnClose" onClick={onCloseDialog}>
         <VisuallyHidden>Close</VisuallyHidden>
       </button>
-      <ErrorBoundary>
-        <React.Suspense fallback={<div>Loading...</div>}>
-          <Widget {...authprops} />
-        </React.Suspense>
-      </ErrorBoundary>
+      <Widget {...authprops} />
     </Dialog>
   )
 }
