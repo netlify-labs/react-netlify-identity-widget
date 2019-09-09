@@ -21,6 +21,7 @@ type ModalProps = {
 export const IdentityContextProvider = _IdentityContextProvider
 export const useIdentityContext = _useIdentityContext
 export function IdentityModal({ showDialog, onCloseDialog, ...authprops }: ModalProps) {
+  console.log({ authprops })
   return (
     <Dialog
       isOpen={showDialog}

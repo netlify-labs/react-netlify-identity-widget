@@ -9,7 +9,7 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-netlify-identity": "^0.1.9",
-    "react-netlify-identity-widget": "^0.2.1",
+    "react-netlify-identity-widget": "^0.2.2",
     "react-scripts": "^3.0.0"
   },
   "devDependencies": {

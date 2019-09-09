@@ -2,7 +2,7 @@
   "name": "react-netlify-identity-widget",
   "version": "0.2.2",
   "main": "dist/index.js",
-  "module": "dist/react-netlify-identity-widget.es.production.js",
+  "module": "dist/react-netlify-identity-widget.esm.js",
   "typings": "dist/index.d.ts",
   "files": [
     "dist",
@@ -34,8 +34,7 @@
     "@reach/dialog": "^0.2.3",
     "@reach/tabs": "^0.1.3",
     "@reach/visually-hidden": "^0.1.3",
-    "react": "^15.0.0 || ^16.0.0",
-    "react-dom": "^15.0.0 || ^16.0.0",
+    "react": ">=16",
     "react-netlify-identity": "^0.1.8"
   },
   "config": {
