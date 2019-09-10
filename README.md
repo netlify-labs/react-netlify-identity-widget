@@ -43,7 +43,7 @@ function AuthStatusView() {
   return (
     <div>
       <div>
-        <button className="btn" onClick={() => setDialog(true)}>
+        <button className="RNIW_btn" onClick={() => setDialog(true)}>
           {isLoggedIn ? `Hello ${name}, Log out here!` : 'Log In'}
         </button>
       </div>

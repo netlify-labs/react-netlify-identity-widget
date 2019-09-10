@@ -15,9 +15,9 @@ function LoggedOutScreen(props: AuthProps) {
   return (
     <div>
       <Tabs defaultIndex={0}>
-        <TabList className="header">
-          <Tab className="btn btnHeader">Login</Tab>
-          <Tab className="btn btnHeader">Sign Up</Tab>
+        <TabList className="RNIW_header">
+          <Tab className="RNIW_btn RNIW_btnHeader">Login</Tab>
+          <Tab className="RNIW_btn RNIW_btnHeader">Sign Up</Tab>
         </TabList>
 
         <TabPanels>

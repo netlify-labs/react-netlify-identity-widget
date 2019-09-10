@@ -29,35 +29,35 @@ export function Login({ onLogin }: LoginProps) {
           .catch((err) => void console.error(err) || setMsg('Error: ' + err.message))
       }}
     >
-      <div className="formGroup" key="email">
+      <div className="RNIW_formGroup" key="email">
         <label>
           <VisuallyHidden>Enter your email</VisuallyHidden>
           <input
-            className="formControl"
+            className="RNIW_formControl"
             type="email"
             name="email"
             placeholder="Email"
             autoCapitalize="off"
             required={true}
           />
-          <div className="inputFieldIcon inputFieldEmail" />
+          <div className="RNIW_inputFieldIcon RNIW_inputFieldEmail" />
         </label>
       </div>
-      <div className="formGroup" key="password">
+      <div className="RNIW_formGroup" key="password">
         <label>
           <VisuallyHidden>Enter your password</VisuallyHidden>
-          <input className="formControl" type="password" name="password" placeholder="Password" required={true} />
-          <div className="inputFieldIcon inputFieldPassword" />
+          <input className="RNIW_formControl" type="password" name="password" placeholder="Password" required={true} />
+          <div className="RNIW_inputFieldIcon RNIW_inputFieldPassword" />
         </label>
       </div>
 
       <div>
-        <button type="submit" className={isLoading ? 'btn saving' : 'btn'}>
+        <button type="submit" className={isLoading ? 'RNIW_btn RNIW_saving' : 'RNIW_btn'}>
           Log in
         </button>
         {msg && <pre style={{ background: 'salmon', padding: 10 }}>{msg}</pre>}
       </div>
-      <button type="button" className="btnLink forgotPasswordLink">
+      <button type="button" className="RNIW_btnLink forgotPasswordLink">
         Forgot password?
       </button>
     </form>

@@ -21,15 +21,15 @@ export function Logout({ onLogout }: LogoutProps) {
       .catch((err) => void console.error(err) || setMsg('Error: ' + err.message))
   return (
     <>
-      <div className="header">
-        <button className="btn btnHeader active">Logged in</button>
+      <div className="RNIW_header">
+        <button className="RNIW_btn RNIW_btnHeader active">Logged in</button>
       </div>
       <form className="form ">
-        <p className="infoText">
+        <p className="RNIW_infoText">
           Logged in as <br />
-          <span className="infoTextEmail">{name}</span>
+          <span className="RNIW_infoTextEmail">{name}</span>
         </p>
-        <button type="submit" className={isLoading ? 'btn saving' : 'btn'} onClick={logout}>
+        <button type="submit" className={isLoading ? 'RNIW_btn RNIW_saving' : 'RNIW_btn'} onClick={logout}>
           Log out
         </button>
         {msg && <pre style={{ background: 'salmon', padding: 10 }}>{msg}</pre>}
