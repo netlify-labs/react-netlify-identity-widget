@@ -9252,10 +9252,10 @@ react-is@^16.8.1, react-is@^16.8.4:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.8.6.tgz#5bbc1e2d29141c9fbdfed456343fe2bc430a6a16"
   integrity sha512-aUk3bHfZ2bRSVFFbbeVS4i+lNPZr3/WM5jT2J5omUVV1zzcs1nAaf3l51ctA5FFvCRbhrH0bdAsRRQddFJZPtA==
 
-react-netlify-identity-widget@^0.2.3:
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/react-netlify-identity-widget/-/react-netlify-identity-widget-0.2.3.tgz#5a2f48ab2125b5a2f10edbe8c331eba2b8f9983d"
-  integrity sha512-pISbof2xgeVR69hIEDb0aRZP49F4OQARFKOlkUHK1TciheS9xfGpZfM3MUdS/Nf1omz9MSNIq6oM10cLfxHNuw==
+react-netlify-identity-widget@^0.2.5:
+  version "0.2.5"
+  resolved "https://registry.yarnpkg.com/react-netlify-identity-widget/-/react-netlify-identity-widget-0.2.5.tgz#a8a4a97e299aa8de67699e690db493b6e215dd49"
+  integrity sha512-xxkwWmYt6w3fE40pcCi3oDA/cYDAoY0h4vH878KJUrbN0hQV+2lgAIeETNHJcAL2i922QEkkCd8usgfzfK7Siw==
 
 react-netlify-identity@^0.1.9:
   version "0.1.9"
