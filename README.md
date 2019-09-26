@@ -1,5 +1,7 @@
 # React Netlify Identity Widget
 
+> The easiest way to use [Netlify Identity](https://www.netlify.com/docs/identity/?utm_source=github&utm_medium=swyx-RNIW&utm_campaign=devex) with React, no login UI coding required!
+
 This is a React port of https://github.com/netlify/netlify-identity-widget (48kb), taking the lightweight functionality of https://github.com/sw-yx/react-netlify-identity (4kb) and adding back the nicer UI with a focus on accessibility (with @reach UI) and bundle size (only 6kb as of writing).
 
 ## demo
