@@ -26,7 +26,6 @@ export function IdentityModal({ showDialog, onCloseDialog, ...authprops }: Modal
       role="dialog"
       aria-modal="true"
       aria-label="Login Modal"
-      aria-labelledby="loginDialog"
       isOpen={showDialog}
       onDismiss={onCloseDialog}
       style={{
