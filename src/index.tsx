@@ -23,6 +23,10 @@ export const useIdentityContext = _useIdentityContext
 export function IdentityModal({ showDialog, onCloseDialog, ...authprops }: ModalProps) {
   return (
     <Dialog
+      role="dialog"
+      aria-modal="true"
+      aria-label="Login Modal"
+      aria-labelledby="loginDialog"
       isOpen={showDialog}
       onDismiss={onCloseDialog}
       style={{
