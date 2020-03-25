@@ -15,7 +15,7 @@ and the source is in `/examples`.
 we require some peer dependencies:
 
 ```bash
-yarn add react-netlify-identity-widget @reach/dialog @reach/tabs @reach/visually-hidden
+yarn add react-netlify-identity react-netlify-identity-widget @reach/dialog @reach/tabs @reach/visually-hidden
 ```
 
 and the styles are optional but provided. here's how to use `IdentityModal, useIdentityContext, IdentityContextProvider`:
@@ -23,42 +23,76 @@ and the styles are optional but provided. here's how to use `IdentityModal, useI
 ```tsx
 import React from 'react'
 import './App.css'
-import IdentityModal, { useIdentityContext, IdentityContextProvider } from 'react-netlify-identity-widget'
+import { IdentityModal, useIdentityContext, IdentityContextProvider } from 'react-netlify-identity-widget'
 import 'react-netlify-identity-widget/styles.css'
+import "@reach/tabs/styles.css"
 
 function App() {
-  const url = 'https://your-identity-instance.netlify.com/' // supply the url of your Netlify site instance. VERY IMPORTANT. no point putting in env var since this is public anyway
+  const url = process.env.REACT_APP_NETLIFY_IDENTITY_URL || 'url here for running locally' // should look something like "https://foo.netlify.com"
+  if (!url)
+    throw new Error(
+      'process.env.REACT_APP_NETLIFY_IDENTITY_URL is blank2, which means you probably forgot to set it in your Netlify environment variables',
+    )
   return (
     <IdentityContextProvider url={url}>
       <AuthStatusView />
     </IdentityContextProvider>
   )
 }
-export default App
+
+// // code split the modal til you need it!
+// const IdentityModal = React.lazy(() => import('react-netlify-identity-widget'))
 
 function AuthStatusView() {
   const identity = useIdentityContext()
   const [dialog, setDialog] = React.useState(false)
   const name =
-    (identity && identity.user && identity.user.user_metadata && identity.user.user_metadata.name) || 'NoName'
-  const isLoggedIn = identity && identity.isLoggedIn
+    (identity && identity.user && identity.user.user_metadata && identity.user.user_metadata.full_name) || 'NoName'
+  const avatar_url = identity && identity.user && identity.user.user_metadata && identity.user.user_metadata.avatar_url
   return (
-    <div>
-      <div>
-        <button className="RNIW_btn" onClick={() => setDialog(true)}>
-          {isLoggedIn ? `Hello ${name}, Log out here!` : 'Log In'}
-        </button>
-      </div>
-      <IdentityModal
-        showDialog={dialog}
-        onCloseDialog={() => setDialog(false)}
-        onLogin={(user) => console.log('hello ', user.user_metadata)}
-        onSignup={(user) => console.log('welcome ', user.user_metadata)}
-        onLogout={() => console.log('bye ', name)}
-      />
+    <div className="App">
+      <header className="App-header">
+        {identity && identity.isLoggedIn ? (
+          <>
+            <h1> hello {name}!</h1>
+            {avatar_url && <img alt="user name" src={avatar_url} style={{ height: 100, borderRadius: '50%' }} />}
+            <button className="btn" style={{ maxWidth: 400, background: 'orangered' }} onClick={() => setDialog(true)}>
+              LOG OUT
+            </button>
+          </>
+        ) : (
+            <>
+              <h1> hello! try logging in! </h1>
+              <button className="btn" style={{ maxWidth: 400, background: 'darkgreen' }} onClick={() => setDialog(true)}>
+                LOG IN
+            </button>
+            </>
+          )}
+
+        <IdentityModal
+          showDialog={dialog}
+          onCloseDialog={() => setDialog(false)}
+          onLogin={(user) => console.log('hello ', user?.user_metadata)}
+          onSignup={(user) => console.log('welcome ', user?.user_metadata)}
+          onLogout={() => console.log('bye ', name)}
+        />
+
+        <h3>
+          Or{' '}
+          <a
+            href="https://github.com/sw-yx/react-netlify-identity-widget"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: 'powderblue' }}
+          >
+            view the source
+          </a>
+        </h3>
+      </header>
     </div>
   )
 }
+export default App
 ```
 
 You may also code split the Modal if you wish with `React.lazy` and `React.Suspense`.
