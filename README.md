@@ -1,3 +1,8 @@
+# SEEKING MAINTAINERS
+
+i've [left Netlify](https://www.swyx.io/writing/farewell-netlify/). obviously i still care about netlify but im gonna have other stuff to do and wont be able to give this my full attention. pls open an issue if you use this and want to take over. post your npm username too. i'd love to find a good home for this project.
+
+
 # React Netlify Identity Widget
 
 > The easiest way to use [Netlify Identity](https://www.netlify.com/docs/identity/?utm_source=github&utm_medium=swyx-RNIW&utm_campaign=devex) with React, no login UI coding required!
